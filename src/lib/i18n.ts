@@ -20,7 +20,7 @@ const translations = {
       invited: "Estás cordialmente invitado/a a celebrar nuestra boda",
       extraZero: "Tu invitación es personal e intransferible.",
       extraOne: "Puedes traer 1 invitado adicional.",
-      extraMany: (n: number) => `Puedes traer hasta ${n} invitados adicionales.`,
+      extraMany: "Puedes traer hasta {n} invitados adicionales.",
     },
     countdown: {
       title: "Faltan",
@@ -95,7 +95,7 @@ const translations = {
       invited: "Du bist herzlich eingeladen, unsere Hochzeit zu feiern",
       extraZero: "Deine Einladung ist persönlich und nicht übertragbar.",
       extraOne: "Du darfst 1 zusätzlichen Gast mitbringen.",
-      extraMany: (n: number) => `Du darfst bis zu ${n} zusätzliche Gäste mitbringen.`,
+      extraMany: "Du darfst bis zu {n} zusätzliche Gäste mitbringen.",
     },
     countdown: {
       title: "Noch",
@@ -156,6 +156,13 @@ export type Translations = (typeof translations)[Language];
 
 export function getTranslations(language: Language): Translations {
   return translations[language];
+}
+
+export function getExtraGuestsMessage(language: Language, count: number): string {
+  const { greeting } = translations[language];
+  if (count === 0) return greeting.extraZero;
+  if (count === 1) return greeting.extraOne;
+  return greeting.extraMany.replace("{n}", String(count));
 }
 
 export const WEDDING_DATE = new Date("2026-11-15T17:00:00-06:00");

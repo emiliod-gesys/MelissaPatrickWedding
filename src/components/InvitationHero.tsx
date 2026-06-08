@@ -3,15 +3,18 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import type { Translations } from "@/lib/i18n";
+import type { Language } from "@/lib/types";
+import { getExtraGuestsMessage, getTranslations } from "@/lib/i18n";
 
 interface InvitationHeroProps {
   displayName: string;
   extraGuests: number;
-  t: Translations;
+  language: Language;
 }
 
-export function InvitationHero({ displayName, extraGuests, t }: InvitationHeroProps) {
+export function InvitationHero({ displayName, extraGuests, language }: InvitationHeroProps) {
+  const t = getTranslations(language);
+  const extraMessage = getExtraGuestsMessage(language, extraGuests);
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -19,13 +22,6 @@ export function InvitationHero({ displayName, extraGuests, t }: InvitationHeroPr
   });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
-  const extraMessage =
-    extraGuests === 0
-      ? t.greeting.extraZero
-      : extraGuests === 1
-        ? t.greeting.extraOne
-        : t.greeting.extraMany(extraGuests);
 
   return (
     <section ref={ref} className="relative min-h-screen overflow-hidden">

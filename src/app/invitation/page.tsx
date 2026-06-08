@@ -20,7 +20,7 @@ export default async function InvitationPage() {
       <InvitationHero
         displayName={session.displayName}
         extraGuests={session.extraGuests}
-        t={t}
+        language={session.language}
       />
       <div className="relative z-10 bg-cream">
         <Countdown t={t.countdown} />
