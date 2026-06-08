@@ -152,7 +152,7 @@ const translations = {
   },
 } as const;
 
-export type Translations = (typeof translations)["es"];
+export type Translations = (typeof translations)[Language];
 
 export function getTranslations(language: Language): Translations {
   return translations[language];
