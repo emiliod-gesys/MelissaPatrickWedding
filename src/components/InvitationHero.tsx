@@ -49,9 +49,9 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
         >
           <WeddingLogo
             variant="onDark"
-            width={200}
-            height={90}
-            className="hero-logo-shadow mx-auto h-auto w-48 md:w-56"
+            width={300}
+            height={135}
+            className="hero-logo-shadow mx-auto h-auto w-72 md:w-84"
             priority
           />
         </motion.div>
@@ -60,7 +60,7 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="mb-2 font-[family-name:var(--font-display)] text-xl font-light tracking-[0.3em] uppercase md:text-2xl"
+          className="mb-2 font-[family-name:var(--font-display)] text-3xl font-light tracking-[0.3em] uppercase md:text-4xl"
         >
           {t.hero.together}
         </motion.p>
@@ -69,7 +69,7 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="mb-6 font-[family-name:var(--font-display)] text-5xl font-light md:text-7xl lg:text-8xl"
+          className="mb-6 font-[family-name:var(--font-display)] text-7xl font-light md:text-[6.75rem] lg:text-[9rem]"
         >
           Melissa <span className="text-gold-light">&</span> Patrick
         </motion.h1>
@@ -78,14 +78,14 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
           transition={{ delay: 0.7, duration: 0.6 }}
-          className="mb-8 h-px w-32 bg-gold-light/60"
+          className="mb-8 h-px w-48 bg-gold-light/60"
         />
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9 }}
-          className="mb-1 font-[family-name:var(--font-display)] text-2xl md:text-3xl"
+          className="mb-1 font-[family-name:var(--font-display)] text-4xl md:text-5xl"
         >
           {t.greeting.dear} {displayName}
         </motion.p>
@@ -94,7 +94,7 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1 }}
-          className="max-w-lg text-base leading-relaxed text-ivory md:text-lg"
+          className="max-w-2xl text-xl leading-relaxed text-ivory md:text-2xl"
         >
           {t.greeting.invited}
         </motion.p>
@@ -103,9 +103,9 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.3 }}
-          className="mt-8 rounded-2xl border border-white/25 bg-charcoal/45 px-8 py-4 backdrop-blur-sm"
+          className="mt-8 rounded-2xl border border-white/25 bg-charcoal/45 px-10 py-5 backdrop-blur-sm"
         >
-          <p className="text-sm tracking-wide text-ivory md:text-base">{extraMessage}</p>
+          <p className="text-base tracking-wide text-ivory md:text-xl">{extraMessage}</p>
         </motion.div>
 
         <motion.div
@@ -114,10 +114,12 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           transition={{ delay: 1.5 }}
           className="mt-10 space-y-1"
         >
-          <p className="font-[family-name:var(--font-display)] text-2xl tracking-widest text-ivory">
+          <p className="font-[family-name:var(--font-display)] text-4xl tracking-widest text-ivory">
             {t.hero.date}
           </p>
-          <p className="text-sm tracking-[0.2em] text-ivory uppercase">{t.hero.location}</p>
+          <p className="text-base tracking-[0.2em] text-ivory uppercase md:text-lg">
+            {t.hero.location}
+          </p>
         </motion.div>
 
         <motion.div
