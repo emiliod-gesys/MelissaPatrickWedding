@@ -10,67 +10,72 @@ interface TimelineProps {
 }
 
 const EVENTS = [
-  { key: "photos" as const, icon: TIMELINE_ICONS.photos },
-  { key: "ceremony" as const, icon: TIMELINE_ICONS.ceremony },
   { key: "cocktail" as const, icon: TIMELINE_ICONS.cocktail },
-  { key: "dinner" as const, icon: TIMELINE_ICONS.dinner },
+  { key: "ceremony" as const, icon: TIMELINE_ICONS.ceremony },
+  { key: "photos" as const, icon: TIMELINE_ICONS.photos },
   { key: "toast" as const, icon: TIMELINE_ICONS.toast },
+  { key: "dinner" as const, icon: TIMELINE_ICONS.dinner },
   { key: "party" as const, icon: TIMELINE_ICONS.party },
-];
+] as const;
 
 export function Timeline({ language }: TimelineProps) {
   const t = getTranslations(language).timeline;
 
   return (
-    <section className="py-20">
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mb-16 text-center font-[family-name:var(--font-display)] text-3xl font-light tracking-widest text-charcoal md:text-4xl"
-      >
-        {t.title}
-      </motion.h2>
+    <section className="bg-ivory px-4 py-20 md:py-24">
+      <div className="mx-auto max-w-4xl text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-6 font-[family-name:var(--font-body)] text-2xl font-normal tracking-[0.35em] text-sage-dark uppercase md:text-3xl"
+        >
+          {t.title}
+        </motion.h2>
 
-      <div className="relative mx-auto max-w-lg px-6">
-        <div className="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-gold/40 to-transparent" />
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="mx-auto mb-16 max-w-2xl text-sm leading-relaxed font-light text-charcoal/65 md:text-base"
+        >
+          {t.subtitle}
+        </motion.p>
 
-        {EVENTS.map((event, i) => (
-          <motion.div
-            key={event.key}
-            initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: i * 0.1, duration: 0.6 }}
-            className={`relative mb-12 flex items-center gap-6 ${
-              i % 2 === 0 ? "flex-row" : "flex-row-reverse"
-            }`}
-          >
-            <div className={`flex-1 ${i % 2 === 0 ? "text-right" : "text-left"}`}>
-              <h3 className="font-[family-name:var(--font-display)] text-xl text-charcoal">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-14 sm:grid-cols-3 sm:gap-x-10 sm:gap-y-16">
+          {EVENTS.map((event, i) => (
+            <motion.div
+              key={event.key}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: i * 0.08, duration: 0.5 }}
+              className="flex flex-col items-center"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                className="mb-5 flex h-24 w-24 items-center justify-center md:h-28 md:w-28"
+              >
+                <Image
+                  src={event.icon}
+                  alt={t[event.key]}
+                  width={112}
+                  height={112}
+                  className="h-full w-full object-contain opacity-80"
+                />
+              </motion.div>
+
+              <h3 className="mb-1.5 text-sm font-normal tracking-wide text-charcoal/80 md:text-base">
                 {t[event.key]}
               </h3>
-              <p className="mt-1 text-sm tracking-widest text-gold">
-                {t[`${event.key}Time` as keyof typeof t]}
+              <p className="text-sm font-light tracking-wider text-charcoal/50 md:text-base">
+                {t[`${event.key}Time`]}
               </p>
-            </div>
-
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-ivory shadow-lg shadow-gold/20"
-            >
-              <Image
-                src={event.icon}
-                alt={t[event.key]}
-                width={36}
-                height={36}
-                className="h-9 w-9 object-contain"
-              />
             </motion.div>
-
-            <div className="flex-1" />
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
