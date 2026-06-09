@@ -9,7 +9,20 @@ const BACKDROP_PHOTOS = [
   "/media/fotos/IMG_0560.jpeg",
 ];
 
-const POLAROIDS = [
+interface PolaroidConfig {
+  src: string;
+  rotate: number;
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  width: string;
+  delay: number;
+  floatDuration: number;
+  hideOnTablet?: boolean;
+}
+
+const POLAROIDS: PolaroidConfig[] = [
   {
     src: "/media/fotos/IMG_5686.jpeg",
     rotate: -10,
@@ -24,7 +37,6 @@ const POLAROIDS = [
     rotate: 8,
     top: "18%",
     right: "4%",
-    left: undefined,
     width: "w-32 lg:w-40",
     delay: 0.35,
     floatDuration: 6.2,
@@ -34,7 +46,6 @@ const POLAROIDS = [
     rotate: -6,
     bottom: "14%",
     left: "6%",
-    top: undefined,
     width: "w-36 lg:w-42",
     delay: 0.5,
     floatDuration: 5.8,
@@ -44,8 +55,6 @@ const POLAROIDS = [
     rotate: 11,
     bottom: "10%",
     right: "5%",
-    left: undefined,
-    top: undefined,
     width: "w-36 lg:w-44",
     delay: 0.25,
     floatDuration: 6.5,
@@ -65,13 +74,12 @@ const POLAROIDS = [
     rotate: -7,
     top: "38%",
     right: "2%",
-    left: undefined,
     width: "w-28 lg:w-36",
     delay: 0.45,
     floatDuration: 6.8,
     hideOnTablet: true,
   },
-] as const;
+];
 
 function Polaroid({
   src,
@@ -84,7 +92,7 @@ function Polaroid({
   delay,
   floatDuration,
   hideOnTablet,
-}: (typeof POLAROIDS)[number]) {
+}: PolaroidConfig) {
   const position = { top, left, right, bottom };
 
   return (
