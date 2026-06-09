@@ -117,7 +117,7 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           <p className="font-[family-name:var(--font-display)] text-4xl tracking-widest text-ivory">
             {t.hero.date}
           </p>
-          <p className="text-base tracking-[0.2em] text-ivory uppercase md:text-lg">
+          <p className="max-w-xl text-sm leading-relaxed tracking-[0.15em] text-ivory uppercase md:text-base">
             {t.hero.location}
           </p>
         </motion.div>

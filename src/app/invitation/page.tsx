@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/session";
 import { InvitationHero } from "@/components/InvitationHero";
+import { OurStory } from "@/components/OurStory";
 import { Countdown } from "@/components/Countdown";
 import { Timeline } from "@/components/Timeline";
 import { PhotoGallery } from "@/components/PhotoGallery";
@@ -20,6 +21,7 @@ export default async function InvitationPage() {
         language={session.language}
       />
       <div className="relative z-10 bg-cream">
+        <OurStory language={session.language} />
         <Countdown language={session.language} />
         <Timeline language={session.language} />
         <PhotoGallery language={session.language} />

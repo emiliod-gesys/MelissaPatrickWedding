@@ -12,8 +12,19 @@ const translations = {
     },
     hero: {
       together: "Juntos para siempre",
-      date: "15 de Noviembre, 2026",
-      location: "Ciudad de México",
+      date: "17 de Octubre, 2026",
+      location: "Palo Alto, Casa del Lago, Coatepeque, Santa Ana, El Salvador",
+    },
+    story: {
+      title: "¿Sabías que?",
+      paragraphs: [
+        "Nuestra historia comenzó en Alemania, en un pequeño pueblo llamado Heidelberg un 26 de Septiembre. Todo comenzó con una linda caminata bajo la lluvia, desde el momento que nos conocimos nuestro amor no ha dejado de crecer, convirtiéndose en la unión perfecta entre dos culturas.",
+        "Juntos, no solo hemos impulsado nuestro crecimiento personal, sino también hemos recorrido lugares nuevos y creado recuerdos inolvidables.",
+        "Finalmente el 10 de noviembre del 2025, nos dimos el Sí más hermoso e importante de nuestras vidas.",
+      ],
+      cta: "Acompáñanos a hacerlo oficial:",
+      date: "17 de octubre del 2026",
+      location: "Palo Alto, Casa del Lago, Coatepeque, Santa Ana, El Salvador",
     },
     greeting: {
       dear: "Querido/a",
@@ -89,8 +100,19 @@ const translations = {
     },
     hero: {
       together: "Für immer zusammen",
-      date: "15. November 2026",
-      location: "Mexiko-Stadt",
+      date: "17. Oktober 2026",
+      location: "Palo Alto, Casa del Lago, Coatepeque, Santa Ana, El Salvador",
+    },
+    story: {
+      title: "Wusstest du schon?",
+      paragraphs: [
+        "Unsere Geschichte begann in Deutschland, in einem kleinen Ort namens Heidelberg, am 26. September. Alles startete mit einem schönen Spaziergang im Regen – seit dem Moment, in dem wir uns kennengelernt haben, ist unsere Liebe stetig gewachsen und wurde zur perfekten Verbindung zweier Kulturen.",
+        "Gemeinsam haben wir nicht nur unser persönliches Wachstum gefördert, sondern auch neue Orte bereist und unvergessliche Erinnerungen geschaffen.",
+        "Am 10. November 2025 haben wir uns das schönste und wichtigste Ja unseres Lebens gegeben.",
+      ],
+      cta: "Begleite uns, wenn wir es offiziell machen:",
+      date: "17. Oktober 2026",
+      location: "Palo Alto, Casa del Lago, Coatepeque, Santa Ana, El Salvador",
     },
     greeting: {
       dear: "Liebe/r",
@@ -169,7 +191,9 @@ export function getExtraGuestsMessage(language: Language, count: number): string
   return greeting.extraMany.replace("{n}", String(count));
 }
 
-export const WEDDING_DATE = new Date("2026-11-15T17:00:00-06:00");
+export const WEDDING_DATE = new Date("2026-10-17T17:00:00-06:00");
+
+export const STORY_PHOTO = "/media/fotos/IMG_5984.jpeg";
 
 export const PHOTOS = [
   "/media/fotos/IMG_1471.jpeg",
