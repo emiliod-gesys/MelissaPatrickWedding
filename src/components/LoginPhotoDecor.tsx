@@ -26,45 +26,45 @@ const POLAROIDS: PolaroidConfig[] = [
   {
     src: "/media/fotos/IMG_5686.jpeg",
     rotate: -10,
-    top: "12%",
-    left: "4%",
-    width: "w-36 lg:w-44",
+    top: "8%",
+    left: "14%",
+    width: "w-44 md:w-48 lg:w-56",
     delay: 0.15,
     floatDuration: 5.5,
   },
   {
     src: "/media/fotos/IMG_1381.jpeg",
     rotate: 8,
-    top: "18%",
-    right: "4%",
-    width: "w-32 lg:w-40",
+    top: "12%",
+    right: "14%",
+    width: "w-44 md:w-48 lg:w-52",
     delay: 0.35,
     floatDuration: 6.2,
   },
   {
     src: "/media/fotos/IMG_5658.jpeg",
     rotate: -6,
-    bottom: "14%",
-    left: "6%",
-    width: "w-36 lg:w-42",
+    bottom: "10%",
+    left: "15%",
+    width: "w-44 md:w-48 lg:w-56",
     delay: 0.5,
     floatDuration: 5.8,
   },
   {
     src: "/media/fotos/IMG_0425.jpeg",
     rotate: 11,
-    bottom: "10%",
-    right: "5%",
-    width: "w-36 lg:w-44",
+    bottom: "8%",
+    right: "14%",
+    width: "w-44 md:w-48 lg:w-56",
     delay: 0.25,
     floatDuration: 6.5,
   },
   {
     src: "/media/fotos/IMG_7743.jpeg",
     rotate: 4,
-    top: "42%",
-    left: "2%",
-    width: "w-28 lg:w-36",
+    top: "38%",
+    left: "10%",
+    width: "w-40 lg:w-48",
     delay: 0.6,
     floatDuration: 7,
     hideOnTablet: true,
@@ -72,9 +72,9 @@ const POLAROIDS: PolaroidConfig[] = [
   {
     src: "/media/fotos/IMG_0572.jpeg",
     rotate: -7,
-    top: "38%",
-    right: "2%",
-    width: "w-28 lg:w-36",
+    top: "34%",
+    right: "10%",
+    width: "w-40 lg:w-48",
     delay: 0.45,
     floatDuration: 6.8,
     hideOnTablet: true,
@@ -112,7 +112,7 @@ function Polaroid({
           duration: floatDuration,
           ease: "easeInOut",
         }}
-        className={`${width} bg-ivory p-2.5 pb-10 shadow-2xl shadow-charcoal/10 ring-1 ring-gold/20`}
+        className={`${width} bg-ivory p-3 pb-12 shadow-2xl shadow-charcoal/10 ring-1 ring-gold/20`}
       >
         <div className="relative aspect-[4/5] overflow-hidden">
           <Image
@@ -120,7 +120,7 @@ function Polaroid({
             alt=""
             fill
             className="object-cover"
-            sizes="(max-width: 1024px) 160px, 200px"
+            sizes="(max-width: 1024px) 200px, 260px"
           />
         </div>
         <p className="mt-3 text-center font-[family-name:var(--font-display)] text-xs tracking-widest text-gold/70 italic">
@@ -168,8 +168,8 @@ export function LoginPhotoDecor() {
       </div>
 
       {/* Marco decorativo central */}
-      <div className="pointer-events-none absolute inset-8 z-[1] hidden rounded-[2rem] border border-gold/10 lg:block" />
-      <div className="pointer-events-none absolute inset-12 z-[1] hidden rounded-[1.5rem] border border-gold/5 lg:block" />
+      <div className="pointer-events-none absolute inset-6 z-[1] hidden rounded-[2rem] border border-gold/10 lg:block" />
+      <div className="pointer-events-none absolute inset-10 z-[1] hidden rounded-[1.5rem] border border-gold/5 lg:block" />
 
       {/* Polaroids */}
       {POLAROIDS.map((polaroid) => (
@@ -184,7 +184,7 @@ export function LoginPhotoDecor() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 0.7, y: 0 }}
             transition={{ delay: 0.2 + i * 0.1 }}
-            className="h-20 w-16 shrink-0 rotate-[-3deg] overflow-hidden rounded-sm bg-ivory p-1 shadow-lg ring-1 ring-gold/20 first:rotate-[-6deg] last:rotate-[5deg]"
+            className="h-24 w-20 shrink-0 rotate-[-3deg] overflow-hidden rounded-sm bg-ivory p-1.5 shadow-lg ring-1 ring-gold/20 first:rotate-[-6deg] last:rotate-[5deg]"
           >
             <div className="relative h-full w-full">
               <Image src={p.src} alt="" fill className="object-cover" sizes="64px" />
