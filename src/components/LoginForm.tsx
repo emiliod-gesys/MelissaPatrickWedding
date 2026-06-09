@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { FloatingPetals } from "./FloatingPetals";
+import { LoginPhotoDecor } from "./LoginPhotoDecor";
 import { WeddingLogo } from "./WeddingLogo";
 
 export function LoginForm() {
@@ -41,10 +42,9 @@ export function LoginForm() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center px-4">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-24 md:py-8">
+      <LoginPhotoDecor />
       <FloatingPetals />
-
-      <div className="absolute inset-0 bg-gradient-to-br from-ivory via-cream to-blush/40" />
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -52,7 +52,7 @@ export function LoginForm() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="relative z-10 w-full max-w-md"
       >
-        <div className="glass rounded-3xl p-10 shadow-2xl shadow-gold/10">
+        <div className="glass rounded-3xl border border-gold/15 p-10 shadow-2xl shadow-gold/20 backdrop-blur-md">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
