@@ -63,7 +63,7 @@ export function Timeline({ language }: TimelineProps) {
                   alt={t[event.key]}
                   width={112}
                   height={112}
-                  className="h-full w-full object-contain opacity-80"
+                  className="icon-on-light h-full w-full object-contain"
                 />
               </motion.div>
 

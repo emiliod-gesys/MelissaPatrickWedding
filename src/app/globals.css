@@ -43,6 +43,11 @@
     border: 1px solid rgba(201, 169, 98, 0.2);
   }
 
+  .icon-on-light {
+    filter: brightness(0) saturate(100%) invert(38%) sepia(10%) saturate(600%)
+      hue-rotate(118deg) brightness(92%) contrast(88%);
+  }
+
   .shimmer {
     background: linear-gradient(
       90deg,
