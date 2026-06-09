@@ -25,12 +25,12 @@ export function Directions({ language }: DirectionsProps) {
           src={DIRECTIONS_BG}
           alt=""
           fill
-          className="scale-105 object-cover blur-md"
+          className="scale-105 object-cover blur-[3px]"
           sizes="100vw"
           priority={false}
         />
-        <div className="absolute inset-0 bg-cream/70" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ivory/40 via-cream/50 to-cream/80" />
+        <div className="absolute inset-0 bg-cream/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ivory/25 via-cream/35 to-cream/55" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl text-center">
