@@ -5,6 +5,7 @@ import { RsvpSection } from "@/components/RsvpSection";
 import { OurStory } from "@/components/OurStory";
 import { Countdown } from "@/components/Countdown";
 import { Timeline } from "@/components/Timeline";
+import { Directions } from "@/components/Directions";
 import { LoveStory } from "@/components/LoveStory";
 import { DressCode } from "@/components/DressCode";
 import { PhotoGallery } from "@/components/PhotoGallery";
@@ -29,6 +30,7 @@ export default async function InvitationPage() {
         <OurStory language={session.language} />
         <Countdown language={session.language} />
         <Timeline language={session.language} />
+        <Directions language={session.language} />
         <LoveStory language={session.language} />
         <DressCode language={session.language} />
         <PhotoGallery language={session.language} />

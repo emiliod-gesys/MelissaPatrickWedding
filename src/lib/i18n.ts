@@ -74,6 +74,14 @@ const translations = {
       party: "Fiesta",
       partyTime: "8:00pm",
     },
+    directions: {
+      title: "Cómo llegar",
+      subtitle: "Te esperamos en Palo Alto, Casa del Lago. Usa el mapa para llegar con facilidad.",
+      address: "Palo Alto, Casa del Lago, Coatepeque, Santa Ana, El Salvador",
+      mapTitle: "Ubicación de la boda",
+      openInMaps: "Abrir en Google Maps",
+      getDirections: "Obtener indicaciones",
+    },
     gallery: {
       title: "Nuestros momentos",
     },
@@ -233,6 +241,15 @@ const translations = {
       party: "Feier",
       partyTime: "20:00 Uhr",
     },
+    directions: {
+      title: "Anfahrt",
+      subtitle:
+        "Wir erwarten dich in Palo Alto, Casa del Lago. Nutze die Karte, um bequem anzukommen.",
+      address: "Palo Alto, Casa del Lago, Coatepeque, Santa Ana, El Salvador",
+      mapTitle: "Hochzeitslocation",
+      openInMaps: "In Google Maps öffnen",
+      getDirections: "Route planen",
+    },
     gallery: {
       title: "Unsere Momente",
     },
@@ -334,6 +351,12 @@ export function getExtraGuestsMessage(language: Language, count: number): string
 }
 
 export const WEDDING_DATE = new Date("2026-10-17T17:00:00-06:00");
+
+/** 13°53'25.7"N 89°31'55.4"W — Palo Alto, Casa del Lago */
+export const VENUE_COORDS = {
+  lat: 13.890472,
+  lng: -89.532056,
+} as const;
 
 export const STORY_PHOTO = "/media/fotos/IMG_5984.jpeg";
 
