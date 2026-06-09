@@ -35,12 +35,11 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/50 via-charcoal/30 to-cream" />
       </motion.div>
 
       <motion.div
         style={{ opacity }}
-        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center text-ivory"
+        className="hero-text-shadow relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center text-ivory"
       >
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -52,7 +51,7 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
             variant="onDark"
             width={200}
             height={90}
-            className="mx-auto h-auto w-48 md:w-56 drop-shadow-lg"
+            className="hero-logo-shadow mx-auto h-auto w-48 md:w-56"
             priority
           />
         </motion.div>
@@ -95,7 +94,7 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1 }}
-          className="max-w-lg text-base leading-relaxed text-ivory/90 md:text-lg"
+          className="max-w-lg text-base leading-relaxed text-ivory md:text-lg"
         >
           {t.greeting.invited}
         </motion.p>
@@ -104,9 +103,9 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.3 }}
-          className="mt-8 rounded-2xl border border-gold-light/30 bg-charcoal/30 px-8 py-4 backdrop-blur-sm"
+          className="mt-8 rounded-2xl border border-white/25 bg-charcoal/45 px-8 py-4 backdrop-blur-sm"
         >
-          <p className="text-sm tracking-wide text-gold-light md:text-base">{extraMessage}</p>
+          <p className="text-sm tracking-wide text-ivory md:text-base">{extraMessage}</p>
         </motion.div>
 
         <motion.div
@@ -115,10 +114,10 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           transition={{ delay: 1.5 }}
           className="mt-10 space-y-1"
         >
-          <p className="font-[family-name:var(--font-display)] text-2xl tracking-widest text-gold-light">
+          <p className="font-[family-name:var(--font-display)] text-2xl tracking-widest text-ivory">
             {t.hero.date}
           </p>
-          <p className="text-sm tracking-[0.2em] text-ivory/70 uppercase">{t.hero.location}</p>
+          <p className="text-sm tracking-[0.2em] text-ivory uppercase">{t.hero.location}</p>
         </motion.div>
 
         <motion.div
