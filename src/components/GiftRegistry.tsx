@@ -14,7 +14,7 @@ function BankDetails({
   fields,
 }: {
   title: string;
-  fields: { label: string; value: string }[];
+  fields: readonly { readonly label: string; readonly value: string }[];
 }) {
   return (
     <div className="flex h-full min-h-[18rem] flex-col items-center justify-center bg-ivory px-8 py-12 text-center md:min-h-[22rem] md:px-12">
