@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { TIMELINE_ICONS } from "@/lib/i18n";
-import type { Translations } from "@/lib/i18n";
+import { getTranslations, TIMELINE_ICONS } from "@/lib/i18n";
+import type { Language } from "@/lib/types";
 
 interface TimelineProps {
-  t: Translations["timeline"];
+  language: Language;
 }
 
 const EVENTS = [
@@ -18,7 +18,9 @@ const EVENTS = [
   { key: "party" as const, icon: TIMELINE_ICONS.party },
 ];
 
-export function Timeline({ t }: TimelineProps) {
+export function Timeline({ language }: TimelineProps) {
+  const t = getTranslations(language).timeline;
+
   return (
     <section className="py-20">
       <motion.h2

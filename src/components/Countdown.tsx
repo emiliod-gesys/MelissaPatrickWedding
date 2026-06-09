@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { WEDDING_DATE } from "@/lib/i18n";
-import type { Translations } from "@/lib/i18n";
+import { getTranslations, WEDDING_DATE } from "@/lib/i18n";
+import type { Language } from "@/lib/types";
 
 interface CountdownProps {
-  t: Translations["countdown"];
+  language: Language;
 }
 
 function getTimeLeft() {
@@ -22,7 +22,8 @@ function getTimeLeft() {
   };
 }
 
-export function Countdown({ t }: CountdownProps) {
+export function Countdown({ language }: CountdownProps) {
+  const t = getTranslations(language).countdown;
   const [time, setTime] = useState(getTimeLeft);
 
   useEffect(() => {

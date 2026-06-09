@@ -2,14 +2,16 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { PHOTOS } from "@/lib/i18n";
-import type { Translations } from "@/lib/i18n";
+import { getTranslations, PHOTOS } from "@/lib/i18n";
+import type { Language } from "@/lib/types";
 
 interface PhotoGalleryProps {
-  t: Translations["gallery"];
+  language: Language;
 }
 
-export function PhotoGallery({ t }: PhotoGalleryProps) {
+export function PhotoGallery({ language }: PhotoGalleryProps) {
+  const t = getTranslations(language).gallery;
+
   return (
     <section className="py-20">
       <motion.h2

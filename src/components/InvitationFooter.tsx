@@ -3,14 +3,16 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import type { Translations } from "@/lib/i18n";
+import { getTranslations } from "@/lib/i18n";
+import type { Language } from "@/lib/types";
 
 interface InvitationFooterProps {
-  t: Translations["footer"];
+  language: Language;
   isAdmin: boolean;
 }
 
-export function InvitationFooter({ t, isAdmin }: InvitationFooterProps) {
+export function InvitationFooter({ language, isAdmin }: InvitationFooterProps) {
+  const t = getTranslations(language).footer;
   const router = useRouter();
 
   async function handleLogout() {
