@@ -60,6 +60,27 @@ const translations = {
     gallery: {
       title: "Nuestros momentos",
     },
+    gifts: {
+      label: "Mesa de regalos virtual",
+      title: "¡Muchas gracias!",
+      paragraph1:
+        "Aunque nuestra vida hoy está en Alemania, nuestro corazón nos trajo de vuelta a la tierra de Melissa para celebrar este día con ustedes.",
+      paragraph2:
+        "Si desean acompañarnos con un detalle pueden hacerlo de manera digital como presencial en regalo de sobre, lo recibiremos con todo nuestro cariño.",
+      internationalTitle: "Transferencias Internacionales",
+      international: [
+        { label: "Nombre de la institución", value: "Revolut Bank UAB" },
+        { label: "BIC", value: "REVOLT21" },
+        { label: "IBAN", value: "LT18 3250 0721 9645 3725" },
+        { label: "Nombre de la cuenta", value: "Melissa Esmeralda Moreno Ramirez" },
+      ],
+      localTitle: "Transferencias Salvadoreñas",
+      local: [
+        { label: "Nombre de la institución", value: "Banco Agrícola" },
+        { label: "Cuenta de ahorro", value: "3430553013" },
+        { label: "Nombre de la cuenta", value: "Melissa Moreno" },
+      ],
+    },
     footer: {
       love: "Con amor,",
       names: "Melissa & Patrick",
@@ -148,6 +169,27 @@ const translations = {
     gallery: {
       title: "Unsere Momente",
     },
+    gifts: {
+      label: "Virtueller Geschenktisch",
+      title: "Vielen Dank!",
+      paragraph1:
+        "Obwohl unser Leben heute in Deutschland ist, hat uns unser Herz zurück in Melissas Heimat geführt, um diesen Tag mit euch zu feiern.",
+      paragraph2:
+        "Wenn ihr uns mit einer Geste begleiten möchtet, könnt ihr das digital oder persönlich in einem Umschlag tun – wir nehmen es mit ganzem Herzen entgegen.",
+      internationalTitle: "Internationale Überweisungen",
+      international: [
+        { label: "Name der Bank", value: "Revolut Bank UAB" },
+        { label: "BIC", value: "REVOLT21" },
+        { label: "IBAN", value: "LT18 3250 0721 9645 3725" },
+        { label: "Kontoinhaberin", value: "Melissa Esmeralda Moreno Ramirez" },
+      ],
+      localTitle: "Überweisungen in El Salvador",
+      local: [
+        { label: "Name der Bank", value: "Banco Agrícola" },
+        { label: "Sparkonto", value: "3430553013" },
+        { label: "Kontoinhaberin", value: "Melissa Moreno" },
+      ],
+    },
     footer: {
       love: "Mit Liebe,",
       names: "Melissa & Patrick",
@@ -194,6 +236,11 @@ export function getExtraGuestsMessage(language: Language, count: number): string
 export const WEDDING_DATE = new Date("2026-10-17T17:00:00-06:00");
 
 export const STORY_PHOTO = "/media/fotos/IMG_5984.jpeg";
+
+export const GIFT_PHOTOS = {
+  topLeft: "/media/fotos/5f54611f-c562-4d1c-9f0f-0599f5596e87.jpeg",
+  bottomRight: "/media/fotos/311ce86a-9d4a-42d1-82dd-dca60bcfb390.jpeg",
+} as const;
 
 export const PHOTOS = [
   "/media/fotos/IMG_1471.jpeg",

@@ -5,6 +5,7 @@ import { OurStory } from "@/components/OurStory";
 import { Countdown } from "@/components/Countdown";
 import { Timeline } from "@/components/Timeline";
 import { PhotoGallery } from "@/components/PhotoGallery";
+import { GiftRegistry } from "@/components/GiftRegistry";
 import { InvitationFooter } from "@/components/InvitationFooter";
 import { FloatingPetals } from "@/components/FloatingPetals";
 
@@ -25,6 +26,7 @@ export default async function InvitationPage() {
         <Countdown language={session.language} />
         <Timeline language={session.language} />
         <PhotoGallery language={session.language} />
+        <GiftRegistry language={session.language} />
         <InvitationFooter language={session.language} isAdmin={session.isAdmin} />
       </div>
     </main>
