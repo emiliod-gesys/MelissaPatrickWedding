@@ -358,6 +358,8 @@ export const VENUE_COORDS = {
   lng: -89.532056,
 } as const;
 
+export const DIRECTIONS_BG = "/media/fotos/directions-bg.png";
+
 export const STORY_PHOTO = "/media/fotos/IMG_5984.jpeg";
 
 export const GIFT_PHOTOS = {
