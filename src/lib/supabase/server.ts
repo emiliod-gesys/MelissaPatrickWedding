@@ -19,18 +19,29 @@ export function createAdminClient() {
   });
 }
 
-export async function findGuestByUsername(
-  username: string,
-): Promise<Guest | null> {
+export async function findGuestByLogin(identifier: string): Promise<Guest | null> {
   const supabase = createAdminClient();
-  const { data, error } = await supabase
+  const trimmed = identifier.trim();
+  if (!trimmed) return null;
+
+  const { data: byUsername, error: usernameError } = await supabase
     .from("guests")
     .select("*")
-    .ilike("username", username.trim())
+    .ilike("username", trimmed)
     .maybeSingle();
 
-  if (error) throw error;
-  return data as Guest | null;
+  if (usernameError) throw usernameError;
+  if (byUsername) return byUsername as Guest;
+
+  const { data: byDisplayName, error: displayNameError } = await supabase
+    .from("guests")
+    .select("*")
+    .ilike("display_name", trimmed)
+    .limit(1)
+    .maybeSingle();
+
+  if (displayNameError) throw displayNameError;
+  return byDisplayName as Guest | null;
 }
 
 export async function listGuests(): Promise<Guest[]> {

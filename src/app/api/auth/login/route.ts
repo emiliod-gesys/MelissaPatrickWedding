@@ -1,20 +1,20 @@
 import { NextResponse } from "next/server";
-import { findGuestByUsername } from "@/lib/supabase/server";
+import { findGuestByLogin } from "@/lib/supabase/server";
 import { createSession } from "@/lib/session";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const username = typeof body.username === "string" ? body.username.trim() : "";
+    const identifier = typeof body.username === "string" ? body.username.trim() : "";
 
-    if (!username) {
+    if (!identifier) {
       return NextResponse.json(
-        { error: "El nombre de usuario es requerido" },
+        { error: "El nombre o usuario es requerido" },
         { status: 400 },
       );
     }
 
-    const guest = await findGuestByUsername(username);
+    const guest = await findGuestByLogin(identifier);
 
     if (!guest) {
       return NextResponse.json({ error: "Usuario no encontrado" }, { status: 404 });
