@@ -32,3 +32,15 @@ export interface UpdateGuestInput {
   language?: Language;
   extra_guests?: number;
 }
+
+export interface Rsvp {
+  id: string;
+  guest_id: string;
+  confirmed_count: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface GuestWithRsvp extends Guest {
+  rsvp: Pick<Rsvp, "confirmed_count" | "updated_at"> | null;
+}

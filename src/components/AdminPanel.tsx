@@ -132,7 +132,13 @@ export function AdminPanel({ language }: AdminPanelProps) {
             </h1>
             <p className="mt-2 text-sm text-charcoal/60">{t.subtitle}</p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
+            <Link
+              href="/admin/confirmaciones"
+              className="text-sm tracking-widest text-sage-dark uppercase hover:text-gold"
+            >
+              {t.confirmationsLink}
+            </Link>
             <Link
               href="/invitation"
               className="text-sm tracking-widest text-sage-dark uppercase hover:text-gold"
