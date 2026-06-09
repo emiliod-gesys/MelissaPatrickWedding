@@ -36,82 +36,73 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
   const extraMessage = getExtraGuestsMessage(language, extraGuests);
 
   return (
-    <section className="relative overflow-hidden lg:min-h-screen">
-      <div className="flex flex-col lg:grid lg:min-h-screen lg:grid-cols-2">
-        <div className="relative flex flex-col items-center justify-center bg-[#5a727a] px-6 py-16 text-center text-ivory lg:min-h-screen lg:px-10 lg:py-24">
+    <section className="relative min-h-dvh overflow-hidden">
+      <div className="grid min-h-dvh grid-cols-2">
+        <div className="relative flex min-h-dvh flex-col justify-between bg-[#5a727a] px-2 py-4 text-center text-ivory sm:px-4 lg:px-10 lg:py-12">
           <BotanicalDecor />
 
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
-            className="relative z-10 flex max-w-md flex-col items-center"
+            className="relative z-10 flex flex-col items-center pr-[13vw] lg:pr-0"
           >
             <WeddingLogo
               variant="onDark"
               width={220}
               height={99}
-              className="mx-auto h-auto w-48 md:w-56"
+              className="mx-auto h-auto w-[4.5rem] sm:w-32 lg:w-56"
               priority
             />
 
-            <h1 className="mt-6 font-[family-name:var(--font-body)] text-2xl font-medium tracking-wide md:text-3xl">
+            <h1 className="mt-2 font-[family-name:var(--font-body)] text-[0.7rem] font-medium leading-tight tracking-wide sm:mt-4 sm:text-lg lg:text-3xl">
               {t.hero.weddingTitle}
             </h1>
 
-            <p className="mt-5 font-[family-name:var(--font-display)] text-xl font-light md:text-2xl">
+            <p className="mt-1.5 font-[family-name:var(--font-display)] text-[0.65rem] font-light leading-snug sm:mt-3 sm:text-base lg:text-2xl">
               {t.greeting.dear} {displayName}
             </p>
 
-            <p className="mt-3 max-w-xs text-sm leading-relaxed font-light text-ivory/90 md:max-w-sm md:text-base">
+            <p className="mt-1.5 line-clamp-3 text-[0.55rem] leading-snug font-light text-ivory/90 sm:mt-2 sm:text-xs sm:leading-relaxed lg:max-w-sm lg:text-base">
               {t.greeting.invited}
             </p>
+          </motion.div>
 
-            <p className="mt-5 max-w-xs border-t border-ivory/25 pt-5 text-xs leading-relaxed font-light text-ivory/85 md:text-sm">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
+            className="relative z-10 flex flex-col items-center pr-[13vw] pb-1 lg:pr-0 lg:pb-0"
+          >
+            <p className="line-clamp-2 border-t border-ivory/25 pt-2 text-[0.5rem] leading-snug font-light text-ivory/85 sm:text-xs lg:text-sm">
               {extraMessage}
             </p>
 
-            <p className="mt-6 font-[family-name:var(--font-body)] text-base tracking-wide md:text-lg">
+            <p className="mt-2 text-[0.55rem] leading-snug tracking-wide sm:mt-3 sm:text-sm lg:text-lg">
               {t.hero.dateLong}
             </p>
 
-            <p className="mt-2 max-w-xs text-[0.65rem] leading-relaxed tracking-[0.12em] text-ivory/75 uppercase md:text-xs">
+            <p className="mt-1 line-clamp-3 text-[0.45rem] leading-tight tracking-[0.08em] text-ivory/75 uppercase sm:text-[0.65rem] sm:tracking-[0.12em] lg:text-xs">
               {t.hero.location}
             </p>
 
             <a
               href="#rsvp"
-              className="mt-10 flex h-16 w-16 items-center justify-center rounded-full border-2 border-ivory text-xs tracking-[0.2em] transition-colors hover:bg-ivory/10"
+              className="mt-2.5 flex h-9 w-9 items-center justify-center rounded-full border-2 border-ivory text-[0.45rem] tracking-[0.15em] transition-colors hover:bg-ivory/10 sm:mt-4 sm:h-12 sm:w-12 sm:text-[0.6rem] lg:mt-8 lg:h-16 lg:w-16 lg:text-xs lg:tracking-[0.2em]"
             >
               {t.hero.rsvp}
             </a>
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="relative mx-auto my-6 h-64 w-44 shrink-0 shadow-2xl lg:hidden"
-        >
-          <Image
-            src={HERO_PHOTOS.rings}
-            alt=""
-            fill
-            className="object-cover"
-            sizes="176px"
-            priority
-          />
-        </motion.div>
-
-        <div className="relative min-h-[45vh] lg:min-h-screen">
+        <div className="relative min-h-dvh">
           <Image
             src={HERO_PHOTOS.beach}
             alt="Melissa & Patrick"
             fill
             className="object-cover object-center"
             priority
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes="50vw"
           />
         </div>
       </div>
@@ -120,14 +111,14 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.4, duration: 0.8 }}
-        className="pointer-events-none absolute top-1/2 left-1/2 z-20 hidden h-[min(52vh,480px)] w-[min(28vw,280px)] -translate-x-1/2 -translate-y-1/2 shadow-2xl lg:block"
+        className="pointer-events-none absolute top-1/2 left-1/2 z-20 h-[min(40dvh,320px)] w-[min(24vw,280px)] -translate-x-1/2 -translate-y-1/2 shadow-2xl sm:h-[min(46dvh,400px)] sm:w-[min(26vw,280px)] lg:h-[min(52dvh,480px)] lg:w-[min(28vw,280px)]"
       >
         <Image
           src={HERO_PHOTOS.rings}
           alt=""
           fill
           className="object-cover"
-          sizes="280px"
+          sizes="(max-width: 1024px) 24vw, 280px"
           priority
         />
       </motion.div>
