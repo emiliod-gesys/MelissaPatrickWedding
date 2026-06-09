@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { WeddingLogo } from "./WeddingLogo";
 import type { Language } from "@/lib/types";
 import { getExtraGuestsMessage, getTranslations } from "@/lib/i18n";
 
@@ -47,12 +48,11 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           transition={{ duration: 1, ease: "easeOut" }}
           className="mb-8"
         >
-          <Image
-            src="/media/iconos/Logo_Blanco.png"
-            alt="Logo"
+          <WeddingLogo
+            variant="onDark"
             width={200}
             height={90}
-            className="mx-auto h-auto w-48 md:w-56"
+            className="mx-auto h-auto w-48 md:w-56 drop-shadow-lg"
             priority
           />
         </motion.div>

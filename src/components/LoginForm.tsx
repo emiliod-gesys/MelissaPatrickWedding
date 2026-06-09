@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { FloatingPetals } from "./FloatingPetals";
+import { WeddingLogo } from "./WeddingLogo";
 
 export function LoginForm() {
   const router = useRouter();
@@ -57,16 +57,9 @@ export function LoginForm() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-8 flex justify-center"
+            className="mb-8"
           >
-            <Image
-              src="/media/iconos/Logo_Blanco.png"
-              alt="Melissa & Patrick"
-              width={180}
-              height={80}
-              className="h-auto w-44 drop-shadow-md"
-              priority
-            />
+            <WeddingLogo variant="onLight" priority />
           </motion.div>
 
           <motion.h1
