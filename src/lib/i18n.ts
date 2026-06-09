@@ -60,6 +60,18 @@ const translations = {
     gallery: {
       title: "Nuestros momentos",
     },
+    loveStory: {
+      title: "La historia de amor",
+      paragraph:
+        "Queremos unir lo más hermoso de nuestras dos culturas, la alemana y la salvadoreña, creando un espacio donde te sientas en casa junto a nosotros. Este es el inicio de la familia que soñamos formar, y esperamos de corazón poder contar con tu presencia.",
+    },
+    dressCode: {
+      title: "Dress code",
+      womenTitle: "Mujeres",
+      women: ["Vestido de fiesta", "Largo o corto", "Evitar blanco o rojo"],
+      menTitle: "Hombres",
+      men: ["Vestimenta formal", "Saco o Blazer", "Evitar usar jeans o caqui"],
+    },
     gifts: {
       label: "Mesa de regalos virtual",
       title: "¡Muchas gracias!",
@@ -169,6 +181,18 @@ const translations = {
     gallery: {
       title: "Unsere Momente",
     },
+    loveStory: {
+      title: "Die Liebesgeschichte",
+      paragraph:
+        "Wir möchten das Schönste unserer beiden Kulturen vereinen – die deutsche und die salvadorianische – und einen Ort schaffen, an dem du dich mit uns wie zu Hause fühlst. Dies ist der Beginn der Familie, von der wir träumen, und wir hoffen von Herzen, dass du dabei sein kannst.",
+    },
+    dressCode: {
+      title: "Dress code",
+      womenTitle: "Damen",
+      women: ["Festliches Kleid", "Lang oder kurz", "Bitte kein Weiß oder Rot"],
+      menTitle: "Herren",
+      men: ["Formelle Kleidung", "Sakko oder Blazer", "Bitte keine Jeans oder Khaki"],
+    },
     gifts: {
       label: "Virtueller Geschenktisch",
       title: "Vielen Dank!",
@@ -240,6 +264,14 @@ export const STORY_PHOTO = "/media/fotos/IMG_5984.jpeg";
 export const GIFT_PHOTOS = {
   topLeft: "/media/fotos/5f54611f-c562-4d1c-9f0f-0599f5596e87.jpeg",
   bottomRight: "/media/fotos/311ce86a-9d4a-42d1-82dd-dca60bcfb390.jpeg",
+} as const;
+
+export const LOVE_STORY_PHOTOS = {
+  topLeft: "/media/fotos/IMG_5658.jpeg",
+  bottomLeft: "/media/fotos/IMG_0560.jpeg",
+  topRight: "/media/fotos/IMG_5686.jpeg",
+  bottomRightLeft: "/media/fotos/IMG_1381.jpeg",
+  bottomRightRight: "/media/fotos/IMG_0572.jpeg",
 } as const;
 
 export const PHOTOS = [
