@@ -12,8 +12,11 @@ const translations = {
     },
     hero: {
       together: "Juntos para siempre",
+      weddingTitle: "¡Nos casamos!",
       date: "17 de Octubre, 2026",
+      dateLong: "Sábado 17 de octubre del 2026",
       location: "Palo Alto, Casa del Lago, Coatepeque, Santa Ana, El Salvador",
+      rsvp: "RSVP",
     },
     rsvp: {
       title: "Confirma tu asistencia",
@@ -179,8 +182,11 @@ const translations = {
     },
     hero: {
       together: "Für immer zusammen",
+      weddingTitle: "Wir heiraten!",
       date: "17. Oktober 2026",
+      dateLong: "Samstag, 17. Oktober 2026",
       location: "Palo Alto, Casa del Lago, Coatepeque, Santa Ana, El Salvador",
+      rsvp: "RSVP",
     },
     rsvp: {
       title: "Bestätige deine Teilnahme",
@@ -356,6 +362,11 @@ export const WEDDING_DATE = new Date("2026-10-17T17:00:00-06:00");
 export const VENUE_COORDS = {
   lat: 13.890472,
   lng: -89.532056,
+} as const;
+
+export const HERO_PHOTOS = {
+  beach: "/media/fotos/IMG_0560.jpeg",
+  rings: "/media/fotos/IMG_0425.jpeg",
 } as const;
 
 export const DIRECTIONS_BG = "/media/fotos/directions-bg.png";

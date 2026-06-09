@@ -99,7 +99,7 @@ export function RsvpSection({ language, extraGuests }: RsvpSectionProps) {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-cream px-6 py-20 text-center md:py-24">
+      <section id="rsvp" className="relative overflow-hidden bg-cream px-6 py-20 text-center md:py-24">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,169,98,0.08)_0%,transparent_70%)]" />
 
         <motion.div
