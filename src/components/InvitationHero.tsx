@@ -31,64 +31,163 @@ function BotanicalDecor() {
   );
 }
 
+function RingsPhoto({
+  className,
+  sizes,
+  squareCrop = false,
+}: {
+  className?: string;
+  sizes: string;
+  squareCrop?: boolean;
+}) {
+  return (
+    <Image
+      src={HERO_PHOTOS.rings}
+      alt=""
+      fill
+      className={
+        squareCrop
+          ? "scale-110 object-cover object-[center_42%]"
+          : "object-cover object-center"
+      }
+      sizes={sizes}
+      priority
+    />
+  );
+}
+
 export function InvitationHero({ displayName, extraGuests, language }: InvitationHeroProps) {
   const t = getTranslations(language);
   const extraMessage = getExtraGuestsMessage(language, extraGuests);
 
   return (
-    <section className="relative min-h-dvh overflow-hidden">
-      <div className="grid min-h-dvh grid-cols-2">
-        <div className="relative flex min-h-dvh flex-col justify-between bg-[#5a727a] px-2 py-4 text-center text-ivory sm:px-4 lg:px-10 lg:py-12">
+    <section className="relative overflow-hidden">
+      {/* Móvil: layout vertical estilo referencia Wix */}
+      <div className="lg:hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="bg-cream px-6 py-10 text-center"
+        >
+          <WeddingLogo
+            variant="onLight"
+            width={260}
+            height={117}
+            className="mx-auto h-auto w-56"
+            priority
+          />
+
+          <p className="mt-8 font-[family-name:var(--font-display)] text-2xl font-light text-charcoal">
+            {t.greeting.dear} {displayName}
+          </p>
+
+          <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed font-light text-charcoal/75">
+            {t.greeting.invited}
+          </p>
+
+          <p className="mx-auto mt-4 max-w-sm border-t border-gold/25 pt-4 text-sm leading-relaxed font-light text-charcoal/70">
+            {extraMessage}
+          </p>
+
+          <p className="mx-auto mt-4 max-w-xs text-[0.65rem] leading-relaxed tracking-[0.12em] text-charcoal/55 uppercase">
+            {t.hero.location}
+          </p>
+        </motion.div>
+
+        <div className="relative bg-[#5a727a] px-6 pt-10 pb-28 text-center text-ivory">
           <BotanicalDecor />
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="relative z-10"
+          >
+            <h1 className="font-[family-name:var(--font-body)] text-2xl font-medium tracking-wide">
+              {t.hero.weddingTitle}
+            </h1>
+
+            <p className="mt-4 font-[family-name:var(--font-body)] text-base tracking-wide">
+              {t.hero.dateLong}
+            </p>
+
+            <a
+              href="#rsvp"
+              className="mx-auto mt-8 flex h-16 w-16 items-center justify-center rounded-full border-2 border-ivory text-xs tracking-[0.2em] transition-colors hover:bg-ivory/10"
+            >
+              {t.hero.rsvp}
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.35, duration: 0.7 }}
+            className="absolute bottom-0 left-1/2 z-30 aspect-square h-44 w-44 -translate-x-1/2 translate-y-1/2 overflow-hidden shadow-2xl"
+          >
+            <RingsPhoto sizes="176px" squareCrop />
+          </motion.div>
+        </div>
+
+        <div className="relative min-h-[52vh]">
+          <Image
+            src={HERO_PHOTOS.beach}
+            alt="Melissa & Patrick"
+            fill
+            className="object-cover object-center"
+            priority
+            sizes="100vw"
+          />
+        </div>
+      </div>
+
+      {/* Escritorio: split-screen horizontal */}
+      <div className="relative hidden min-h-dvh lg:grid lg:grid-cols-2">
+        <div className="relative flex min-h-dvh flex-col items-center justify-center bg-[#5a727a] px-10 py-24 text-center text-ivory">
+          <BotanicalDecor />
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
-            className="relative z-10 flex flex-col items-center pr-[13vw] lg:pr-0"
+            className="relative z-10 flex max-w-md flex-col items-center"
           >
             <WeddingLogo
               variant="onDark"
               width={220}
               height={99}
-              className="mx-auto h-auto w-[4.5rem] sm:w-32 lg:w-56"
+              className="mx-auto h-auto w-56"
               priority
             />
 
-            <h1 className="mt-2 font-[family-name:var(--font-body)] text-[0.7rem] font-medium leading-tight tracking-wide sm:mt-4 sm:text-lg lg:text-3xl">
+            <h1 className="mt-6 font-[family-name:var(--font-body)] text-3xl font-medium tracking-wide">
               {t.hero.weddingTitle}
             </h1>
 
-            <p className="mt-1.5 font-[family-name:var(--font-display)] text-[0.65rem] font-light leading-snug sm:mt-3 sm:text-base lg:text-2xl">
+            <p className="mt-5 font-[family-name:var(--font-display)] text-2xl font-light">
               {t.greeting.dear} {displayName}
             </p>
 
-            <p className="mt-1.5 line-clamp-3 text-[0.55rem] leading-snug font-light text-ivory/90 sm:mt-2 sm:text-xs sm:leading-relaxed lg:max-w-sm lg:text-base">
+            <p className="mt-3 max-w-sm text-base leading-relaxed font-light text-ivory/90">
               {t.greeting.invited}
             </p>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
-            className="relative z-10 flex flex-col items-center pr-[13vw] pb-1 lg:pr-0 lg:pb-0"
-          >
-            <p className="line-clamp-2 border-t border-ivory/25 pt-2 text-[0.5rem] leading-snug font-light text-ivory/85 sm:text-xs lg:text-sm">
+            <p className="mt-5 max-w-sm border-t border-ivory/25 pt-5 text-sm leading-relaxed font-light text-ivory/85">
               {extraMessage}
             </p>
 
-            <p className="mt-2 text-[0.55rem] leading-snug tracking-wide sm:mt-3 sm:text-sm lg:text-lg">
+            <p className="mt-6 font-[family-name:var(--font-body)] text-lg tracking-wide">
               {t.hero.dateLong}
             </p>
 
-            <p className="mt-1 line-clamp-3 text-[0.45rem] leading-tight tracking-[0.08em] text-ivory/75 uppercase sm:text-[0.65rem] sm:tracking-[0.12em] lg:text-xs">
+            <p className="mt-2 max-w-xs text-xs leading-relaxed tracking-[0.12em] text-ivory/75 uppercase">
               {t.hero.location}
             </p>
 
             <a
               href="#rsvp"
-              className="mt-2.5 flex h-9 w-9 items-center justify-center rounded-full border-2 border-ivory text-[0.45rem] tracking-[0.15em] transition-colors hover:bg-ivory/10 sm:mt-4 sm:h-12 sm:w-12 sm:text-[0.6rem] lg:mt-8 lg:h-16 lg:w-16 lg:text-xs lg:tracking-[0.2em]"
+              className="mt-10 flex h-16 w-16 items-center justify-center rounded-full border-2 border-ivory text-xs tracking-[0.2em] transition-colors hover:bg-ivory/10"
             >
               {t.hero.rsvp}
             </a>
@@ -105,23 +204,16 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
             sizes="50vw"
           />
         </div>
-      </div>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.4, duration: 0.8 }}
-        className="pointer-events-none absolute top-1/2 left-1/2 z-20 h-[min(40dvh,320px)] w-[min(24vw,280px)] -translate-x-1/2 -translate-y-1/2 shadow-2xl sm:h-[min(46dvh,400px)] sm:w-[min(26vw,280px)] lg:h-[min(52dvh,480px)] lg:w-[min(28vw,280px)]"
-      >
-        <Image
-          src={HERO_PHOTOS.rings}
-          alt=""
-          fill
-          className="object-cover"
-          sizes="(max-width: 1024px) 24vw, 280px"
-          priority
-        />
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="pointer-events-none absolute top-1/2 left-1/2 z-20 h-[min(52dvh,480px)] w-[min(28vw,280px)] -translate-x-1/2 -translate-y-1/2 shadow-2xl"
+        >
+          <RingsPhoto sizes="280px" />
+        </motion.div>
+      </div>
     </section>
   );
 }
