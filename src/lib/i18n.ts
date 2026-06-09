@@ -232,7 +232,7 @@ const translations = {
       seconds: "Sekunden",
     },
     timeline: {
-      title: "Itinerar",
+      title: "Zeitplan",
       subtitle:
         "Wir möchten, dass du Teil von allem bist! Deshalb teilen wir mit dir einen Überblick über die Zeiten und Events an unserem Hochzeitstag.",
       cocktail: "Willkommenscocktail",
