@@ -47,8 +47,8 @@ function RingsPhoto({
       fill
       className={
         squareCrop
-          ? "scale-110 object-cover object-[center_42%]"
-          : "object-cover object-center"
+          ? "scale-110 object-cover object-bottom"
+          : "object-cover object-bottom"
       }
       sizes={sizes}
       priority

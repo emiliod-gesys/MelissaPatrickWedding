@@ -365,7 +365,7 @@ export const VENUE_COORDS = {
 } as const;
 
 export const HERO_PHOTOS = {
-  beach: "/media/fotos/IMG_0560.jpeg",
+  beach: "/media/fotos/IMG_0572.jpeg",
   rings: "/media/fotos/IMG_0425.jpeg",
 } as const;
 
