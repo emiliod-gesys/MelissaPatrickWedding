@@ -36,9 +36,9 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
   const extraMessage = getExtraGuestsMessage(language, extraGuests);
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
-      <div className="grid min-h-screen lg:grid-cols-2">
-        <div className="relative flex min-h-[72vh] flex-col items-center justify-center bg-[#5a727a] px-6 py-16 text-center text-ivory lg:min-h-screen lg:px-10 lg:py-24">
+    <section className="relative overflow-hidden lg:min-h-screen">
+      <div className="flex flex-col lg:grid lg:min-h-screen lg:grid-cols-2">
+        <div className="relative flex flex-col items-center justify-center bg-[#5a727a] px-6 py-16 text-center text-ivory lg:min-h-screen lg:px-10 lg:py-24">
           <BotanicalDecor />
 
           <motion.div
@@ -88,6 +88,22 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
           </motion.div>
         </div>
 
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="relative mx-auto my-6 h-64 w-44 shrink-0 shadow-2xl lg:hidden"
+        >
+          <Image
+            src={HERO_PHOTOS.rings}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="176px"
+            priority
+          />
+        </motion.div>
+
         <div className="relative min-h-[45vh] lg:min-h-screen">
           <Image
             src={HERO_PHOTOS.beach}
@@ -104,7 +120,7 @@ export function InvitationHero({ displayName, extraGuests, language }: Invitatio
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.4, duration: 0.8 }}
-        className="absolute top-[min(72vh,520px)] left-1/2 z-20 h-72 w-48 -translate-x-1/2 -translate-y-1/2 shadow-2xl lg:top-1/2 lg:h-[min(52vh,480px)] lg:w-[min(28vw,280px)]"
+        className="pointer-events-none absolute top-1/2 left-1/2 z-20 hidden h-[min(52vh,480px)] w-[min(28vw,280px)] -translate-x-1/2 -translate-y-1/2 shadow-2xl lg:block"
       >
         <Image
           src={HERO_PHOTOS.rings}
