@@ -4,11 +4,12 @@ const translations = {
   es: {
     login: {
       title: "Bienvenido",
-      subtitle: "Ingresa tu nombre de invitado para ver tu invitación personalizada",
-      placeholder: "Tu nombre de usuario",
+      subtitle: "Ingresa tu nombre o usuario para ver tu invitación",
+      placeholder: "Tu nombre o usuario",
       submit: "Entrar",
       error: "Usuario no encontrado. Verifica con los novios.",
       loading: "Entrando...",
+      connectionError: "Error de conexión. Intenta de nuevo.",
     },
     hero: {
       together: "Juntos para siempre",
@@ -173,12 +174,12 @@ const translations = {
   de: {
     login: {
       title: "Willkommen",
-      subtitle:
-        "Gib deinen Gästenamen ein, um deine personalisierte Einladung zu sehen",
-      placeholder: "Dein Benutzername",
+      subtitle: "Gib deinen Namen oder Benutzernamen ein, um deine Einladung zu sehen",
+      placeholder: "Dein Name oder Benutzername",
       submit: "Eintreten",
       error: "Benutzer nicht gefunden. Bitte bei den Brautleuten nachfragen.",
       loading: "Eintritt...",
+      connectionError: "Verbindungsfehler. Bitte versuche es erneut.",
     },
     hero: {
       together: "Für immer zusammen",

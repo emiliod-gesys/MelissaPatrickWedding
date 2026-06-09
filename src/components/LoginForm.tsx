@@ -1,17 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { FloatingPetals } from "./FloatingPetals";
+import { LoginLanguageToggle } from "./LoginLanguageToggle";
 import { LoginPhotoDecor } from "./LoginPhotoDecor";
 import { WeddingLogo } from "./WeddingLogo";
+import { getTranslations } from "@/lib/i18n";
+import type { Language } from "@/lib/types";
+
+const LOGIN_LANGUAGE_KEY = "login-language";
 
 export function LoginForm() {
   const router = useRouter();
+  const [language, setLanguage] = useState<Language>("es");
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const t = getTranslations(language);
+
+  useEffect(() => {
+    const saved = localStorage.getItem(LOGIN_LANGUAGE_KEY);
+    if (saved === "es" || saved === "de") {
+      setLanguage(saved);
+    }
+  }, []);
+
+  function handleLanguageChange(next: Language) {
+    setLanguage(next);
+    localStorage.setItem(LOGIN_LANGUAGE_KEY, next);
+    setError("");
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -28,14 +48,14 @@ export function LoginForm() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Usuario no encontrado");
+        setError(res.status === 404 ? t.login.error : data.error || t.login.error);
         return;
       }
 
       router.push(data.isAdmin ? "/admin" : "/invitation");
       router.refresh();
     } catch {
-      setError("Error de conexión. Intenta de nuevo.");
+      setError(t.login.connectionError);
     } finally {
       setLoading(false);
     }
@@ -53,6 +73,8 @@ export function LoginForm() {
         className="relative z-10 w-full max-w-md"
       >
         <div className="glass rounded-3xl border border-gold/15 p-10 shadow-2xl shadow-gold/20 backdrop-blur-md">
+          <LoginLanguageToggle language={language} onChange={handleLanguageChange} />
+
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -68,7 +90,7 @@ export function LoginForm() {
             transition={{ delay: 0.4 }}
             className="mb-2 text-center font-[family-name:var(--font-display)] text-4xl font-light tracking-wide text-charcoal"
           >
-            Bienvenido
+            {t.login.title}
           </motion.h1>
 
           <motion.p
@@ -77,7 +99,7 @@ export function LoginForm() {
             transition={{ delay: 0.5 }}
             className="mb-8 text-center text-sm leading-relaxed text-charcoal/70"
           >
-            Ingresa tu nombre de invitado para ver tu invitación personalizada
+            {t.login.subtitle}
           </motion.p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -86,7 +108,7 @@ export function LoginForm() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Tu nombre de usuario"
+                placeholder={t.login.placeholder}
                 autoComplete="username"
                 className="w-full rounded-xl border border-gold/30 bg-ivory/80 px-5 py-4 text-center text-charcoal placeholder:text-charcoal/40 transition-all focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
                 disabled={loading}
@@ -110,7 +132,7 @@ export function LoginForm() {
               disabled={loading || !username.trim()}
               className="w-full rounded-xl bg-gradient-to-r from-gold to-gold-light py-4 font-medium tracking-widest text-ivory uppercase transition-opacity disabled:opacity-50"
             >
-              {loading ? "Entrando..." : "Entrar"}
+              {loading ? t.login.loading : t.login.submit}
             </motion.button>
           </form>
         </div>
