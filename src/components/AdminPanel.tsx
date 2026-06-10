@@ -1,11 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Guest, Language } from "@/lib/types";
-import { downloadGuestsExcel } from "@/lib/exportGuests";
+import {
+  downloadGuestsExcel,
+  downloadImportTemplate,
+  parseGuestsExcel,
+} from "@/lib/guestsExcel";
 import { getTranslations } from "@/lib/i18n";
 
 interface AdminPanelProps {
@@ -32,6 +36,8 @@ export function AdminPanel({ language }: AdminPanelProps) {
   const [editLanguage, setEditLanguage] = useState<Language>("es");
   const [editExtraGuests, setEditExtraGuests] = useState(0);
   const [editIsConyugal, setEditIsConyugal] = useState(false);
+  const [importing, setImporting] = useState(false);
+  const importInputRef = useRef<HTMLInputElement>(null);
 
   const showMessage = useCallback((msg: string) => {
     setMessage(msg);
@@ -127,6 +133,58 @@ export function AdminPanel({ language }: AdminPanelProps) {
     await fetch("/api/auth/logout", { method: "POST" });
     router.push("/login");
     router.refresh();
+  }
+
+  async function handleImportFile(file: File) {
+    setImporting(true);
+    try {
+      const buffer = await file.arrayBuffer();
+      const parsedRows = parseGuestsExcel(buffer);
+      const validRows = parsedRows.filter((row) => row.guest);
+      const parseErrors = parsedRows.filter((row) => row.error);
+
+      if (validRows.length === 0) {
+        const details = parseErrors.map((row) => `Fila ${row.rowNumber}: ${row.error}`).join(" · ");
+        showMessage(details || t.importNoValidRows);
+        return;
+      }
+
+      const res = await fetch("/api/admin/guests/import", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ guests: validRows }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        showMessage(data.error || t.importFailed);
+        return;
+      }
+
+      const apiErrors = (data.errors ?? []) as { row: number; message: string }[];
+      const allErrors = [
+        ...parseErrors.map((row) => `Fila ${row.rowNumber}: ${row.error}`),
+        ...apiErrors.map((row) => `Fila ${row.row}: ${row.message}`),
+      ];
+
+      if (allErrors.length > 0) {
+        showMessage(
+          t.importPartial
+            .replace("{n}", String(data.created ?? 0))
+            .replace("{e}", String(allErrors.length))
+            .replace("{details}", allErrors.slice(0, 3).join(" · ")),
+        );
+      } else {
+        showMessage(t.importSuccess.replace("{n}", String(data.created ?? 0)));
+      }
+
+      await fetchGuests();
+    } catch {
+      showMessage(t.importFailed);
+    } finally {
+      setImporting(false);
+      if (importInputRef.current) importInputRef.current.value = "";
+    }
   }
 
   return (
@@ -265,18 +323,45 @@ export function AdminPanel({ language }: AdminPanelProps) {
           </motion.button>
         </motion.form>
 
-        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-6 flex flex-col gap-4">
           <h2 className="font-[family-name:var(--font-display)] text-2xl text-charcoal">
             {t.guests}
           </h2>
-          <button
-            type="button"
-            onClick={() => downloadGuestsExcel(guests)}
-            disabled={guests.length === 0}
-            className="rounded-lg border border-gold/30 px-4 py-2 text-sm tracking-wide text-sage-dark uppercase transition-colors hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {t.exportGuests}
-          </button>
+          <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={downloadImportTemplate}
+              className="rounded-lg border border-gold/30 px-4 py-2 text-sm tracking-wide text-sage-dark uppercase transition-colors hover:bg-gold/10"
+            >
+              {t.downloadTemplate}
+            </button>
+            <button
+              type="button"
+              onClick={() => importInputRef.current?.click()}
+              disabled={importing}
+              className="rounded-lg border border-gold/30 px-4 py-2 text-sm tracking-wide text-sage-dark uppercase transition-colors hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {importing ? t.importing : t.importGuests}
+            </button>
+            <button
+              type="button"
+              onClick={() => downloadGuestsExcel(guests)}
+              disabled={guests.length === 0}
+              className="rounded-lg border border-gold/30 px-4 py-2 text-sm tracking-wide text-sage-dark uppercase transition-colors hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {t.exportGuests}
+            </button>
+            <input
+              ref={importInputRef}
+              type="file"
+              accept=".xlsx,.xls"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) void handleImportFile(file);
+              }}
+            />
+          </div>
         </div>
 
         {loading ? (
