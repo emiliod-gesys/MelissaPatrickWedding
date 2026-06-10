@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
-import { getMaxAttendees } from "@/lib/rsvp";
+import { getBaseAttendees, getMaxAttendees } from "@/lib/rsvp";
 import { listGuestsWithRsvps } from "@/lib/supabase/rsvp";
 
 export async function GET() {
@@ -23,7 +23,7 @@ export async function GET() {
         max_attendees: getMaxAttendees(guest.extra_guests, guest.is_conyugal),
         confirmed_count: guest.rsvp?.confirmed_count ?? null,
         extras_confirmed: guest.rsvp
-          ? Math.max(0, guest.rsvp.confirmed_count - 1)
+          ? Math.max(0, guest.rsvp.confirmed_count - getBaseAttendees(guest.is_conyugal))
           : null,
         updated_at: guest.rsvp?.updated_at ?? null,
         has_confirmed: guest.rsvp !== null,

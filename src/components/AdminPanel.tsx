@@ -69,7 +69,7 @@ export function AdminPanel({ language }: AdminPanelProps) {
           username,
           display_name: displayName,
           language: guestLanguage,
-          extra_guests: isConyugal ? 0 : extraGuests,
+          extra_guests: extraGuests,
           is_conyugal: isConyugal,
         }),
       });
@@ -106,7 +106,7 @@ export function AdminPanel({ language }: AdminPanelProps) {
         id,
         display_name: editDisplayName,
         language: editLanguage,
-        extra_guests: editIsConyugal ? 0 : editExtraGuests,
+        extra_guests: editExtraGuests,
         is_conyugal: editIsConyugal,
       }),
     });
@@ -290,8 +290,7 @@ export function AdminPanel({ language }: AdminPanelProps) {
                 max={10}
                 value={extraGuests}
                 onChange={(e) => setExtraGuests(Number(e.target.value))}
-                disabled={isConyugal}
-                className="w-full rounded-lg border border-gold/20 bg-ivory px-4 py-3 focus:border-gold focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                className="w-full rounded-lg border border-gold/20 bg-ivory px-4 py-3 focus:border-gold focus:outline-none"
               />
             </div>
             <div className="flex items-start gap-3 md:col-span-2">
@@ -299,10 +298,7 @@ export function AdminPanel({ language }: AdminPanelProps) {
                 id="create-conyugal"
                 type="checkbox"
                 checked={isConyugal}
-                onChange={(e) => {
-                  setIsConyugal(e.target.checked);
-                  if (e.target.checked) setExtraGuests(0);
-                }}
+                onChange={(e) => setIsConyugal(e.target.checked)}
                 className="mt-1 h-4 w-4 rounded border-gold/30 text-gold focus:ring-gold/30"
               />
               <label htmlFor="create-conyugal" className="text-sm text-charcoal/80">
@@ -398,17 +394,13 @@ export function AdminPanel({ language }: AdminPanelProps) {
                       min={0}
                       value={editExtraGuests}
                       onChange={(e) => setEditExtraGuests(Number(e.target.value))}
-                      disabled={editIsConyugal}
-                      className="rounded-lg border border-gold/20 bg-ivory px-3 py-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="rounded-lg border border-gold/20 bg-ivory px-3 py-2"
                     />
                     <label className="flex items-center gap-2 text-sm text-charcoal/80 md:col-span-4">
                       <input
                         type="checkbox"
                         checked={editIsConyugal}
-                        onChange={(e) => {
-                          setEditIsConyugal(e.target.checked);
-                          if (e.target.checked) setEditExtraGuests(0);
-                        }}
+                        onChange={(e) => setEditIsConyugal(e.target.checked)}
                         className="h-4 w-4 rounded border-gold/30 text-gold focus:ring-gold/30"
                       />
                       {t.conyugal}
@@ -447,7 +439,9 @@ export function AdminPanel({ language }: AdminPanelProps) {
                       <p className="text-sm text-charcoal/50">
                         @{guest.username} · {guest.language === "es" ? t.spanish : t.german}
                         {(guest.is_conyugal ?? false)
-                          ? ` · 2 cupos`
+                          ? guest.extra_guests > 0
+                            ? ` · 2 cupos + ${guest.extra_guests} ${t.extraGuests.toLowerCase()}`
+                            : ` · 2 cupos`
                           : ` · ${guest.extra_guests} ${t.extraGuests.toLowerCase()}`}
                       </p>
                     </div>

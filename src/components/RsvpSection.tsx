@@ -96,7 +96,11 @@ export function RsvpSection({ language, extraGuests, isConyugal }: RsvpSectionPr
     }
   }
 
-  const hint = isConyugal ? t.hintConyugal : t.hint.replace("{extras}", String(extraGuests));
+  const hint = isConyugal
+    ? extraGuests > 0
+      ? t.hintConyugalWithExtras.replace("{extras}", String(extraGuests))
+      : t.hintConyugal
+    : t.hint.replace("{extras}", String(extraGuests));
   const modalSubtitle = t.modalSubtitle.replace("{max}", String(maxAttendees));
 
   return (

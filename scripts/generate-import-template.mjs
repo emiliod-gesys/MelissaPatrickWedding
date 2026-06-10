@@ -17,7 +17,7 @@ const examples = [
     Nombre: "María y Carlos García",
     Idioma: "ESP",
     Conyugal: "T",
-    Adicionales: 0,
+    Adicionales: 2,
   },
   {
     Usuario: "hans_mueller",

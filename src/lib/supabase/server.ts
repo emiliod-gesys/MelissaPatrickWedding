@@ -67,7 +67,7 @@ export async function createGuest(
       username: input.username.trim().toLowerCase(),
       display_name: input.display_name.trim(),
       language: input.language,
-      extra_guests: input.is_conyugal ? 0 : input.extra_guests,
+      extra_guests: input.extra_guests,
       is_conyugal: input.is_conyugal ?? false,
       is_admin: input.is_admin ?? false,
     })

@@ -21,7 +21,7 @@ function normalizeGuest(raw: unknown): ImportGuestInput | null {
     typeof guest.display_name === "string" ? guest.display_name.trim() : "";
   const language = guest.language;
   const is_conyugal = Boolean(guest.is_conyugal);
-  const extra_guests = is_conyugal ? 0 : Number(guest.extra_guests ?? 0);
+  const extra_guests = Number(guest.extra_guests ?? 0);
 
   if (!username || !display_name) return null;
   if (language !== "es" && language !== "de") return null;

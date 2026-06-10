@@ -31,6 +31,8 @@ const translations = {
       label: "Confirmados",
       hint: "Incluyéndote a ti. Puedes traer hasta {extras} acompañante(s) adicional(es).",
       hintConyugal: "Esta invitación conyugal incluye 2 cupos para la pareja.",
+      hintConyugalWithExtras:
+        "Esta invitación conyugal incluye 2 cupos para la pareja y hasta {extras} invitado(s) adicional(es).",
       submit: "Confirmar",
       cancel: "Cancelar",
       saving: "Guardando...",
@@ -54,7 +56,9 @@ const translations = {
       extraZero: "Tu invitación es personal e intransferible.",
       extraOne: "Puedes traer 1 invitado adicional.",
       extraMany: "Puedes traer hasta {n} invitados adicionales.",
-      conyugal: "Tu invitación es conyugal e incluye 2 cupos.",
+      conyugal: "Tu invitación es conyugal e incluye 2 cupos para la pareja.",
+      conyugalWithExtras:
+        "Tu invitación es conyugal (2 cupos) y puedes traer hasta {n} invitado(s) adicional(es).",
     },
     countdown: {
       title: "Faltan",
@@ -138,7 +142,7 @@ const translations = {
       language: "Idioma",
       extraGuests: "Invitados adicionales",
       conyugal: "Invitación conyugal",
-      conyugalHint: "Incluye 2 cupos automáticamente",
+      conyugalHint: "Incluye 2 cupos para la pareja; puedes agregar invitados adicionales",
       conyugalBadge: "Conyugal",
       exportGuests: "Exportar invitados",
       downloadTemplate: "Descargar plantilla",
@@ -215,6 +219,8 @@ const translations = {
       label: "Bestätigte Personen",
       hint: "Einschließlich dir. Du darfst bis zu {extras} zusätzliche Begleitung(en) mitbringen.",
       hintConyugal: "Diese Paareinladung umfasst 2 Plätze für das Paar.",
+      hintConyugalWithExtras:
+        "Diese Paareinladung umfasst 2 Plätze für das Paar und bis zu {extras} zusätzliche Gäste.",
       submit: "Bestätigen",
       cancel: "Abbrechen",
       saving: "Speichern...",
@@ -239,6 +245,8 @@ const translations = {
       extraOne: "Du darfst 1 zusätzlichen Gast mitbringen.",
       extraMany: "Du darfst bis zu {n} zusätzliche Gäste mitbringen.",
       conyugal: "Deine Einladung ist für Paare und umfasst 2 Plätze.",
+      conyugalWithExtras:
+        "Deine Paareinladung umfasst 2 Plätze und du darfst bis zu {n} zusätzliche Gäste mitbringen.",
     },
     countdown: {
       title: "Noch",
@@ -323,7 +331,7 @@ const translations = {
       language: "Sprache",
       extraGuests: "Zusätzliche Gäste",
       conyugal: "Paareinladung",
-      conyugalHint: "Umfasst automatisch 2 Plätze",
+      conyugalHint: "Umfasst 2 Plätze für das Paar; zusätzliche Gäste sind möglich",
       conyugalBadge: "Paar",
       exportGuests: "Gäste exportieren",
       downloadTemplate: "Vorlage herunterladen",
@@ -390,7 +398,15 @@ export function getGuestCapacityMessage(
   extraGuests: number,
   isConyugal = false,
 ): string {
-  if (isConyugal) return translations[language].greeting.conyugal;
+  if (isConyugal) {
+    if (extraGuests > 0) {
+      return translations[language].greeting.conyugalWithExtras.replace(
+        "{n}",
+        String(extraGuests),
+      );
+    }
+    return translations[language].greeting.conyugal;
+  }
   return getExtraGuestsMessage(language, extraGuests);
 }
 

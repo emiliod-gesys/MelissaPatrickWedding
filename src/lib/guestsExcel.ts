@@ -36,7 +36,7 @@ const TEMPLATE_EXAMPLES = [
     Nombre: "María y Carlos García",
     Idioma: "ESP",
     Conyugal: "T",
-    Adicionales: 0,
+    Adicionales: 2,
   },
   {
     Usuario: "hans_mueller",
@@ -206,7 +206,7 @@ export function parseGuestsExcel(buffer: ArrayBuffer): ParsedImportRow[] {
         display_name: displayName,
         language,
         is_conyugal: isConyugal,
-        extra_guests: isConyugal ? 0 : extraGuestsNumber,
+        extra_guests: extraGuestsNumber,
       },
     });
   });
