@@ -1,4 +1,5 @@
-export function getMaxAttendees(extraGuests: number): number {
+export function getMaxAttendees(extraGuests: number, isConyugal = false): number {
+  if (isConyugal) return 2;
   return 1 + extraGuests;
 }
 

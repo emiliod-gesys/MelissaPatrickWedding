@@ -4,11 +4,12 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { WeddingLogo } from "./WeddingLogo";
 import type { Language } from "@/lib/types";
-import { getExtraGuestsMessage, getTranslations, HERO_PHOTOS } from "@/lib/i18n";
+import { getGuestCapacityMessage, getTranslations, HERO_PHOTOS } from "@/lib/i18n";
 
 interface InvitationHeroProps {
   displayName: string;
   extraGuests: number;
+  isConyugal: boolean;
   language: Language;
 }
 
@@ -56,9 +57,14 @@ function RingsPhoto({
   );
 }
 
-export function InvitationHero({ displayName, extraGuests, language }: InvitationHeroProps) {
+export function InvitationHero({
+  displayName,
+  extraGuests,
+  isConyugal,
+  language,
+}: InvitationHeroProps) {
   const t = getTranslations(language);
-  const extraMessage = getExtraGuestsMessage(language, extraGuests);
+  const extraMessage = getGuestCapacityMessage(language, extraGuests, isConyugal);
 
   return (
     <section className="relative overflow-hidden">

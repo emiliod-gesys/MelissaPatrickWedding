@@ -16,12 +16,13 @@ export async function GET() {
     }
 
     const rsvp = await getRsvpByGuestId(session.guestId);
-    const maxAttendees = getMaxAttendees(guest.extra_guests);
+    const maxAttendees = getMaxAttendees(guest.extra_guests, guest.is_conyugal);
 
     return NextResponse.json({
       confirmed_count: rsvp?.confirmed_count ?? null,
       max_attendees: maxAttendees,
       extra_guests: guest.extra_guests,
+      is_conyugal: guest.is_conyugal,
       updated_at: rsvp?.updated_at ?? null,
     });
   } catch (error) {
@@ -52,7 +53,7 @@ export async function PUT(request: Request) {
       return NextResponse.json({ error: "Invitado no encontrado" }, { status: 404 });
     }
 
-    const maxAttendees = getMaxAttendees(guest.extra_guests);
+    const maxAttendees = getMaxAttendees(guest.extra_guests, guest.is_conyugal);
 
     if (confirmedCount < 1 || confirmedCount > maxAttendees) {
       return NextResponse.json(

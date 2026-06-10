@@ -43,7 +43,8 @@ export async function POST(request: Request) {
     const display_name =
       typeof body.display_name === "string" ? body.display_name.trim() : "";
     const language = body.language as Language;
-    const extra_guests = Number(body.extra_guests ?? 0);
+    const is_conyugal = Boolean(body.is_conyugal);
+    const extra_guests = is_conyugal ? 0 : Number(body.extra_guests ?? 0);
 
     if (!username || !display_name) {
       return NextResponse.json(
@@ -68,6 +69,7 @@ export async function POST(request: Request) {
       display_name,
       language,
       extra_guests,
+      is_conyugal,
     });
 
     return NextResponse.json({ guest }, { status: 201 });
@@ -98,6 +100,7 @@ export async function PATCH(request: Request) {
       display_name?: string;
       language?: Language;
       extra_guests?: number;
+      is_conyugal?: boolean;
     } = {};
 
     if (typeof body.display_name === "string") {
@@ -106,7 +109,13 @@ export async function PATCH(request: Request) {
     if (body.language === "es" || body.language === "de") {
       updates.language = body.language;
     }
-    if (body.extra_guests !== undefined) {
+    if (body.is_conyugal !== undefined) {
+      updates.is_conyugal = Boolean(body.is_conyugal);
+      if (updates.is_conyugal) {
+        updates.extra_guests = 0;
+      }
+    }
+    if (body.extra_guests !== undefined && !updates.is_conyugal) {
       const n = Number(body.extra_guests);
       if (!Number.isInteger(n) || n < 0) {
         return NextResponse.json(

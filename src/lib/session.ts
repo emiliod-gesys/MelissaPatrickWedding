@@ -48,6 +48,7 @@ export async function getSession(): Promise<SessionPayload | null> {
       displayName: payload.displayName as string,
       language: payload.language as SessionPayload["language"],
       extraGuests: payload.extraGuests as number,
+      isConyugal: Boolean(payload.isConyugal),
       isAdmin: payload.isAdmin as boolean,
     };
   } catch {
@@ -66,6 +67,7 @@ export async function getSessionFromToken(
       displayName: payload.displayName as string,
       language: payload.language as SessionPayload["language"],
       extraGuests: payload.extraGuests as number,
+      isConyugal: Boolean(payload.isConyugal),
       isAdmin: payload.isAdmin as boolean,
     };
   } catch {

@@ -6,6 +6,7 @@ export interface Guest {
   display_name: string;
   language: Language;
   extra_guests: number;
+  is_conyugal: boolean;
   is_admin: boolean;
   created_at: string;
   updated_at: string;
@@ -17,6 +18,7 @@ export interface SessionPayload {
   displayName: string;
   language: Language;
   extraGuests: number;
+  isConyugal: boolean;
   isAdmin: boolean;
 }
 
@@ -25,12 +27,14 @@ export interface CreateGuestInput {
   display_name: string;
   language: Language;
   extra_guests: number;
+  is_conyugal?: boolean;
 }
 
 export interface UpdateGuestInput {
   display_name?: string;
   language?: Language;
   extra_guests?: number;
+  is_conyugal?: boolean;
 }
 
 export interface Rsvp {

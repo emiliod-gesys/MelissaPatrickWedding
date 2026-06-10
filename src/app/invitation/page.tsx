@@ -23,10 +23,15 @@ export default async function InvitationPage() {
       <InvitationHero
         displayName={session.displayName}
         extraGuests={session.extraGuests}
+        isConyugal={session.isConyugal}
         language={session.language}
       />
       <div className="relative z-10 bg-cream">
-        <RsvpSection language={session.language} extraGuests={session.extraGuests} />
+        <RsvpSection
+          language={session.language}
+          extraGuests={session.extraGuests}
+          isConyugal={session.isConyugal}
+        />
         <OurStory language={session.language} />
         <Countdown language={session.language} />
         <Timeline language={session.language} />

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Guest, Language } from "@/lib/types";
+import { downloadGuestsCsv } from "@/lib/exportGuests";
 import { getTranslations } from "@/lib/i18n";
 
 interface AdminPanelProps {
@@ -23,12 +24,14 @@ export function AdminPanel({ language }: AdminPanelProps) {
   const [displayName, setDisplayName] = useState("");
   const [guestLanguage, setGuestLanguage] = useState<Language>("es");
   const [extraGuests, setExtraGuests] = useState(0);
+  const [isConyugal, setIsConyugal] = useState(false);
   const [creating, setCreating] = useState(false);
 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editDisplayName, setEditDisplayName] = useState("");
   const [editLanguage, setEditLanguage] = useState<Language>("es");
   const [editExtraGuests, setEditExtraGuests] = useState(0);
+  const [editIsConyugal, setEditIsConyugal] = useState(false);
 
   const showMessage = useCallback((msg: string) => {
     setMessage(msg);
@@ -60,7 +63,8 @@ export function AdminPanel({ language }: AdminPanelProps) {
           username,
           display_name: displayName,
           language: guestLanguage,
-          extra_guests: extraGuests,
+          extra_guests: isConyugal ? 0 : extraGuests,
+          is_conyugal: isConyugal,
         }),
       });
       const data = await res.json();
@@ -72,6 +76,7 @@ export function AdminPanel({ language }: AdminPanelProps) {
       setDisplayName("");
       setGuestLanguage("es");
       setExtraGuests(0);
+      setIsConyugal(false);
       showMessage(t.created);
       await fetchGuests();
     } finally {
@@ -84,6 +89,7 @@ export function AdminPanel({ language }: AdminPanelProps) {
     setEditDisplayName(guest.display_name);
     setEditLanguage(guest.language);
     setEditExtraGuests(guest.extra_guests);
+    setEditIsConyugal(guest.is_conyugal ?? false);
   }
 
   async function handleSaveEdit(id: string) {
@@ -94,7 +100,8 @@ export function AdminPanel({ language }: AdminPanelProps) {
         id,
         display_name: editDisplayName,
         language: editLanguage,
-        extra_guests: editExtraGuests,
+        extra_guests: editIsConyugal ? 0 : editExtraGuests,
+        is_conyugal: editIsConyugal,
       }),
     });
     if (res.ok) {
@@ -225,8 +232,25 @@ export function AdminPanel({ language }: AdminPanelProps) {
                 max={10}
                 value={extraGuests}
                 onChange={(e) => setExtraGuests(Number(e.target.value))}
-                className="w-full rounded-lg border border-gold/20 bg-ivory px-4 py-3 focus:border-gold focus:outline-none"
+                disabled={isConyugal}
+                className="w-full rounded-lg border border-gold/20 bg-ivory px-4 py-3 focus:border-gold focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
               />
+            </div>
+            <div className="flex items-start gap-3 md:col-span-2">
+              <input
+                id="create-conyugal"
+                type="checkbox"
+                checked={isConyugal}
+                onChange={(e) => {
+                  setIsConyugal(e.target.checked);
+                  if (e.target.checked) setExtraGuests(0);
+                }}
+                className="mt-1 h-4 w-4 rounded border-gold/30 text-gold focus:ring-gold/30"
+              />
+              <label htmlFor="create-conyugal" className="text-sm text-charcoal/80">
+                <span className="font-medium text-charcoal">{t.conyugal}</span>
+                <span className="mt-0.5 block text-xs text-charcoal/55">{t.conyugalHint}</span>
+              </label>
             </div>
           </div>
 
@@ -241,9 +265,19 @@ export function AdminPanel({ language }: AdminPanelProps) {
           </motion.button>
         </motion.form>
 
-        <h2 className="mb-6 font-[family-name:var(--font-display)] text-2xl text-charcoal">
-          {t.guests}
-        </h2>
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="font-[family-name:var(--font-display)] text-2xl text-charcoal">
+            {t.guests}
+          </h2>
+          <button
+            type="button"
+            onClick={() => downloadGuestsCsv(guests)}
+            disabled={guests.length === 0}
+            className="rounded-lg border border-gold/30 px-4 py-2 text-sm tracking-wide text-sage-dark uppercase transition-colors hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {t.exportGuests}
+          </button>
+        </div>
 
         {loading ? (
           <p className="text-center text-charcoal/50">Cargando...</p>
@@ -279,8 +313,21 @@ export function AdminPanel({ language }: AdminPanelProps) {
                       min={0}
                       value={editExtraGuests}
                       onChange={(e) => setEditExtraGuests(Number(e.target.value))}
-                      className="rounded-lg border border-gold/20 bg-ivory px-3 py-2"
+                      disabled={editIsConyugal}
+                      className="rounded-lg border border-gold/20 bg-ivory px-3 py-2 disabled:cursor-not-allowed disabled:opacity-50"
                     />
+                    <label className="flex items-center gap-2 text-sm text-charcoal/80 md:col-span-4">
+                      <input
+                        type="checkbox"
+                        checked={editIsConyugal}
+                        onChange={(e) => {
+                          setEditIsConyugal(e.target.checked);
+                          if (e.target.checked) setEditExtraGuests(0);
+                        }}
+                        className="h-4 w-4 rounded border-gold/30 text-gold focus:ring-gold/30"
+                      />
+                      {t.conyugal}
+                    </label>
                     <div className="flex gap-2 md:col-span-4">
                       <button
                         onClick={() => handleSaveEdit(guest.id)}
@@ -306,10 +353,17 @@ export function AdminPanel({ language }: AdminPanelProps) {
                             {t.adminBadge}
                           </span>
                         )}
+                        {(guest.is_conyugal ?? false) && (
+                          <span className="rounded-full bg-sage/20 px-2 py-0.5 text-xs text-sage-dark">
+                            {t.conyugalBadge}
+                          </span>
+                        )}
                       </div>
                       <p className="text-sm text-charcoal/50">
-                        @{guest.username} · {guest.language === "es" ? t.spanish : t.german} ·{" "}
-                        {guest.extra_guests} {t.extraGuests.toLowerCase()}
+                        @{guest.username} · {guest.language === "es" ? t.spanish : t.german}
+                        {(guest.is_conyugal ?? false)
+                          ? ` · 2 cupos`
+                          : ` · ${guest.extra_guests} ${t.extraGuests.toLowerCase()}`}
                       </p>
                     </div>
                     <div className="flex gap-2">

@@ -26,6 +26,7 @@ export async function POST(request: Request) {
       displayName: guest.display_name,
       language: guest.language,
       extraGuests: guest.extra_guests,
+      isConyugal: guest.is_conyugal ?? false,
       isAdmin: guest.is_admin,
     });
 

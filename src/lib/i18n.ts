@@ -30,6 +30,7 @@ const translations = {
       modalSubtitle: "¿Cuántas personas asistirán? (máximo {max})",
       label: "Confirmados",
       hint: "Incluyéndote a ti. Puedes traer hasta {extras} acompañante(s) adicional(es).",
+      hintConyugal: "Esta invitación conyugal incluye 2 cupos para la pareja.",
       submit: "Confirmar",
       cancel: "Cancelar",
       saving: "Guardando...",
@@ -53,6 +54,7 @@ const translations = {
       extraZero: "Tu invitación es personal e intransferible.",
       extraOne: "Puedes traer 1 invitado adicional.",
       extraMany: "Puedes traer hasta {n} invitados adicionales.",
+      conyugal: "Tu invitación es conyugal e incluye 2 cupos.",
     },
     countdown: {
       title: "Faltan",
@@ -135,6 +137,10 @@ const translations = {
       displayName: "Nombre para mostrar",
       language: "Idioma",
       extraGuests: "Invitados adicionales",
+      conyugal: "Invitación conyugal",
+      conyugalHint: "Incluye 2 cupos automáticamente",
+      conyugalBadge: "Conyugal",
+      exportGuests: "Exportar invitados",
       create: "Crear invitado",
       save: "Guardar",
       delete: "Eliminar",
@@ -200,6 +206,7 @@ const translations = {
       modalSubtitle: "Wie viele Personen nehmen teil? (maximal {max})",
       label: "Bestätigte Personen",
       hint: "Einschließlich dir. Du darfst bis zu {extras} zusätzliche Begleitung(en) mitbringen.",
+      hintConyugal: "Diese Paareinladung umfasst 2 Plätze für das Paar.",
       submit: "Bestätigen",
       cancel: "Abbrechen",
       saving: "Speichern...",
@@ -223,6 +230,7 @@ const translations = {
       extraZero: "Deine Einladung ist persönlich und nicht übertragbar.",
       extraOne: "Du darfst 1 zusätzlichen Gast mitbringen.",
       extraMany: "Du darfst bis zu {n} zusätzliche Gäste mitbringen.",
+      conyugal: "Deine Einladung ist für Paare und umfasst 2 Plätze.",
     },
     countdown: {
       title: "Noch",
@@ -306,6 +314,10 @@ const translations = {
       displayName: "Anzeigename",
       language: "Sprache",
       extraGuests: "Zusätzliche Gäste",
+      conyugal: "Paareinladung",
+      conyugalHint: "Umfasst automatisch 2 Plätze",
+      conyugalBadge: "Paar",
+      exportGuests: "Gäste exportieren",
       create: "Gast erstellen",
       save: "Speichern",
       delete: "Löschen",
@@ -355,6 +367,15 @@ export function getExtraGuestsMessage(language: Language, count: number): string
   if (count === 0) return greeting.extraZero;
   if (count === 1) return greeting.extraOne;
   return greeting.extraMany.replace("{n}", String(count));
+}
+
+export function getGuestCapacityMessage(
+  language: Language,
+  extraGuests: number,
+  isConyugal = false,
+): string {
+  if (isConyugal) return translations[language].greeting.conyugal;
+  return getExtraGuestsMessage(language, extraGuests);
 }
 
 export const WEDDING_DATE = new Date("2026-10-17T17:00:00-06:00");

@@ -19,7 +19,8 @@ export async function GET() {
         display_name: guest.display_name,
         username: guest.username,
         extra_guests: guest.extra_guests,
-        max_attendees: getMaxAttendees(guest.extra_guests),
+        is_conyugal: guest.is_conyugal,
+        max_attendees: getMaxAttendees(guest.extra_guests, guest.is_conyugal),
         confirmed_count: guest.rsvp?.confirmed_count ?? null,
         extras_confirmed: guest.rsvp
           ? Math.max(0, guest.rsvp.confirmed_count - 1)

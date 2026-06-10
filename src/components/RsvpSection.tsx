@@ -3,11 +3,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getTranslations } from "@/lib/i18n";
+import { getMaxAttendees } from "@/lib/rsvp";
 import type { Language } from "@/lib/types";
 
 interface RsvpSectionProps {
   language: Language;
   extraGuests: number;
+  isConyugal: boolean;
 }
 
 interface RsvpData {
@@ -17,7 +19,7 @@ interface RsvpData {
   updated_at: string | null;
 }
 
-export function RsvpSection({ language, extraGuests }: RsvpSectionProps) {
+export function RsvpSection({ language, extraGuests, isConyugal }: RsvpSectionProps) {
   const t = getTranslations(language).rsvp;
   const [data, setData] = useState<RsvpData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -27,7 +29,7 @@ export function RsvpSection({ language, extraGuests }: RsvpSectionProps) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const maxAttendees = data?.max_attendees ?? 1 + extraGuests;
+  const maxAttendees = data?.max_attendees ?? getMaxAttendees(extraGuests, isConyugal);
 
   const fetchRsvp = useCallback(async () => {
     try {
@@ -94,7 +96,7 @@ export function RsvpSection({ language, extraGuests }: RsvpSectionProps) {
     }
   }
 
-  const hint = t.hint.replace("{extras}", String(extraGuests));
+  const hint = isConyugal ? t.hintConyugal : t.hint.replace("{extras}", String(extraGuests));
   const modalSubtitle = t.modalSubtitle.replace("{max}", String(maxAttendees));
 
   return (
