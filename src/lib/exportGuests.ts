@@ -1,28 +1,26 @@
+import * as XLSX from "xlsx";
 import type { Guest } from "@/lib/types";
-
-function escapeCsvCell(value: string): string {
-  return `"${value.replace(/"/g, '""')}"`;
-}
 
 function languageLabel(language: Guest["language"]): string {
   return language === "es" ? "Español" : "Alemán";
 }
 
-export function downloadGuestsCsv(guests: Guest[]): void {
+export function downloadGuestsExcel(guests: Guest[]): void {
   const rows = guests
     .filter((guest) => !guest.is_admin)
-    .map((guest) => [
-      escapeCsvCell(guest.display_name),
-      escapeCsvCell(guest.username),
-      escapeCsvCell(languageLabel(guest.language)),
-    ]);
+    .map((guest) => ({
+      Nombre: guest.display_name,
+      Usuario: guest.username,
+      Idioma: languageLabel(guest.language),
+    }));
 
-  const csv = ["Nombre,Usuario,Idioma", ...rows.map((row) => row.join(","))].join("\n");
-  const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "invitados.csv";
-  link.click();
-  URL.revokeObjectURL(url);
+  const worksheet = XLSX.utils.json_to_sheet(rows, {
+    header: ["Nombre", "Usuario", "Idioma"],
+  });
+  worksheet["!cols"] = [{ wch: 28 }, { wch: 20 }, { wch: 12 }];
+
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Invitados");
+
+  XLSX.writeFile(workbook, "invitados.xlsx");
 }

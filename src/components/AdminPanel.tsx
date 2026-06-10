@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Guest, Language } from "@/lib/types";
-import { downloadGuestsCsv } from "@/lib/exportGuests";
+import { downloadGuestsExcel } from "@/lib/exportGuests";
 import { getTranslations } from "@/lib/i18n";
 
 interface AdminPanelProps {
@@ -271,7 +271,7 @@ export function AdminPanel({ language }: AdminPanelProps) {
           </h2>
           <button
             type="button"
-            onClick={() => downloadGuestsCsv(guests)}
+            onClick={() => downloadGuestsExcel(guests)}
             disabled={guests.length === 0}
             className="rounded-lg border border-gold/30 px-4 py-2 text-sm tracking-wide text-sage-dark uppercase transition-colors hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-50"
           >
