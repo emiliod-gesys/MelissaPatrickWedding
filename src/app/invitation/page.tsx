@@ -10,6 +10,7 @@ import { LoveStory } from "@/components/LoveStory";
 import { DressCode } from "@/components/DressCode";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { GiftRegistry } from "@/components/GiftRegistry";
+import { ContactSection } from "@/components/ContactSection";
 import { InvitationFooter } from "@/components/InvitationFooter";
 import { FloatingPetals } from "@/components/FloatingPetals";
 
@@ -40,6 +41,7 @@ export default async function InvitationPage() {
         <DressCode language={session.language} />
         <PhotoGallery language={session.language} />
         <GiftRegistry language={session.language} />
+        <ContactSection language={session.language} />
         <InvitationFooter language={session.language} isAdmin={session.isAdmin} />
       </div>
     </main>

@@ -128,6 +128,14 @@ const translations = {
         { label: "Nombre de la cuenta", value: "Melissa Moreno" },
       ],
     },
+    contact: {
+      title: "¿Tienes alguna duda?",
+      subtitle: "Comunícate con:",
+      contacts: [
+        { name: "Mariana", phoneDisplay: "+502 3019-9232", phoneHref: "+50230199232" },
+        { name: "Andrea", phoneDisplay: "+503 7037 3199", phoneHref: "+50370373199" },
+      ],
+    },
     footer: {
       love: "Con amor,",
       names: "Melissa & Patrick",
@@ -315,6 +323,14 @@ const translations = {
         { label: "Name der Bank", value: "Banco Agrícola" },
         { label: "Sparkonto", value: "3430553013" },
         { label: "Kontoinhaberin", value: "Melissa Moreno" },
+      ],
+    },
+    contact: {
+      title: "Hast du Fragen?",
+      subtitle: "Kontaktiere:",
+      contacts: [
+        { name: "Mariana", phoneDisplay: "+502 3019-9232", phoneHref: "+50230199232" },
+        { name: "Andrea", phoneDisplay: "+503 7037 3199", phoneHref: "+50370373199" },
       ],
     },
     footer: {
